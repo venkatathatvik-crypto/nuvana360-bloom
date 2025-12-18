@@ -84,7 +84,7 @@ function GraduationCap({ position }: { position: [number, number, number] }) {
         {/* Tassel */}
         <mesh position={[0.4, 0.1, 0]}>
           <sphereGeometry args={[0.08, 16, 16]} />
-          <meshStandardMaterial color="#22d3ee" emissive="#22d3ee" emissiveIntensity={0.3} />
+          <meshStandardMaterial color="#34d399" emissive="#34d399" emissiveIntensity={0.3} />
         </mesh>
       </group>
     </Float>
@@ -101,7 +101,7 @@ function DNAHelix({ position }: { position: [number, number, number] }) {
       const y = (i - 10) * 0.15;
       const angle = i * 0.5;
       items.push(
-        { pos: [Math.cos(angle) * 0.3, y, Math.sin(angle) * 0.3] as [number, number, number], color: '#22d3ee' },
+        { pos: [Math.cos(angle) * 0.3, y, Math.sin(angle) * 0.3] as [number, number, number], color: '#2dd4bf' },
         { pos: [Math.cos(angle + Math.PI) * 0.3, y, Math.sin(angle + Math.PI) * 0.3] as [number, number, number], color: '#10b981' }
       );
     }
@@ -139,8 +139,8 @@ function NeuralNode({ position }: { position: [number, number, number] }) {
       <mesh position={position}>
         <icosahedronGeometry args={[0.15, 1]} />
         <MeshDistortMaterial
-          color="#22d3ee"
-          emissive="#22d3ee"
+          color="#34d399"
+          emissive="#34d399"
           emissiveIntensity={0.3}
           distort={0.3}
           speed={2}
@@ -205,8 +205,8 @@ function Atom({ position }: { position: [number, number, number] }) {
           <mesh key={i} rotation={[rot, 0, 0]}>
             <torusGeometry args={[0.4, 0.01, 8, 64]} />
             <meshStandardMaterial 
-              color="#22d3ee" 
-              emissive="#22d3ee" 
+              color="#2dd4bf" 
+              emissive="#2dd4bf" 
               emissiveIntensity={0.3}
               transparent
               opacity={0.6}
@@ -218,8 +218,8 @@ function Atom({ position }: { position: [number, number, number] }) {
           <mesh key={`electron-${i}`} position={[0.4 * Math.cos(rot), 0.4 * Math.sin(rot), 0]}>
             <sphereGeometry args={[0.04, 16, 16]} />
             <meshStandardMaterial 
-              color="#22d3ee" 
-              emissive="#22d3ee" 
+              color="#34d399" 
+              emissive="#34d399" 
               emissiveIntensity={0.6}
             />
           </mesh>
@@ -262,7 +262,7 @@ function Particles() {
       </bufferGeometry>
       <pointsMaterial
         size={0.05}
-        color="#22d3ee"
+        color="#34d399"
         transparent
         opacity={0.6}
         sizeAttenuation
@@ -278,11 +278,11 @@ function Scene() {
       {/* Lighting */}
       <ambientLight intensity={0.4} />
       <directionalLight position={[10, 10, 5]} intensity={1} color="#ffffff" />
-      <pointLight position={[-5, 5, -5]} intensity={0.5} color="#22d3ee" />
+      <pointLight position={[-5, 5, -5]} intensity={0.5} color="#2dd4bf" />
       <pointLight position={[5, -5, 5]} intensity={0.5} color="#10b981" />
 
       {/* Educational Objects */}
-      <Book position={[-3, 1, -2]} rotation={[0.2, 0.5, 0.1]} color="#22d3ee" />
+      <Book position={[-3, 1, -2]} rotation={[0.2, 0.5, 0.1]} color="#2dd4bf" />
       <Book position={[3.5, -0.5, -1]} rotation={[-0.1, -0.3, 0.2]} color="#10b981" />
       <Book position={[-2, -1.5, 1]} rotation={[0.1, 0.8, -0.1]} color="#6366f1" />
       

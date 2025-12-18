@@ -60,7 +60,7 @@ export function HeroSection() {
           <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <Button 
               size="lg" 
-              className="group relative px-8 py-6 text-lg font-semibold hover-glow glow-turquoise transition-all duration-300"
+              className="group relative px-8 py-6 text-lg font-semibold hover-glow glow-green transition-all duration-300"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Get Started
