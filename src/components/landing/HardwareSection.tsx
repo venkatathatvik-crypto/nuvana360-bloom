@@ -1,0 +1,160 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Tablet, ShieldCheck, Lock, Building2, X, Cpu, Battery, HardDrive, Wifi, Monitor, Smartphone } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { PremiumDoodles } from '@/components/ui/PremiumDoodles';
+
+export function HardwareSection() {
+    const [isSpecOpen, setIsSpecOpen] = useState(false);
+
+    const features = [
+        {
+            icon: Building2,
+            title: 'Institution Branded',
+            description: 'Devices customized with your school\'s identity.'
+        },
+        {
+            icon: Lock,
+            title: 'Firmware Locked',
+            description: 'Restricted access ensuring focus on education only.'
+        },
+        {
+            icon: ShieldCheck,
+            title: 'Controlled Environment',
+            description: 'Safe, secure, and distraction-free learning.'
+        }
+    ];
+
+    const specs = [
+        { label: "Processor", value: "Octa-Core Processor", icon: Cpu },
+        { label: "RAM", value: "4GB", icon: HardDrive },
+        { label: "ROM", value: "64GB", icon: Lock },
+        { label: "Display", value: "10.1\" IPS Display", icon: Monitor },
+        { label: "Android Version", value: "Android 14", icon: Smartphone },
+        { label: "Battery", value: "6000 Mah", icon: Battery },
+    ];
+
+    return (
+        <section className="py-24 bg-background relative overflow-hidden">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-900/10 skew-x-12 blur-3xl" />
+            <PremiumDoodles />
+
+            {/* Section Blenders */}
+            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[hsl(var(--background))] to-transparent z-10 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[hsl(var(--background))] to-transparent z-10 pointer-events-none" />
+
+            <div className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-16 items-center">
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="order-2 md:order-1"
+                    >
+                        <div className="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium mb-6">
+                            Hardware Layer
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                            Nuvana Corebook
+                        </h2>
+                        <p className="text-xl text-muted-foreground mb-8">
+                            Purpose-built classroom devices designed to withstand the rigors of daily use while providing a strictly controlled learning environment.
+                        </p>
+
+                        <div className="space-y-6">
+                            {features.map((feature, idx) => (
+                                <div key={idx} className="flex gap-4">
+                                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400">
+                                        <feature.icon size={24} />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-semibold text-white mb-1">{feature.title}</h3>
+                                        <p className="text-gray-400">{feature.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <Button
+                            className="mt-8 bg-blue-600 hover:bg-blue-500 text-white"
+                            size="lg"
+                            onClick={() => setIsSpecOpen(true)}
+                        >
+                            View Specs
+                        </Button>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="order-1 md:order-2 flex justify-center"
+                    >
+                        {/* Abstract Laptop Visualization */}
+                        <div className="relative w-full max-w-[500px] aspect-video">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-emerald-500/20 rounded-xl blur-2xl" />
+                            <div className="relative w-full h-full bg-slate-900 rounded-xl border border-slate-700 shadow-2xl flex items-center justify-center overflow-hidden group">
+                                {/* Screen Content */}
+                                <div className="absolute inset-[2px] bg-slate-950 rounded-[10px] overflow-hidden">
+                                    <div className="w-full h-full bg-gradient-to-br from-slate-900 to-blue-950 flex flex-col items-center justify-center">
+                                        <Tablet size={64} className="text-blue-500/50 mb-4" />
+                                        <div className="text-blue-200/50 font-mono text-sm">OS: Nuvana360</div>
+                                        <div className="text-emerald-200/50 font-mono text-sm">Connected: NuvaNet</div>
+                                    </div>
+                                    {/* Glare */}
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* Spec Widget Modal */}
+            <AnimatePresence>
+                {isSpecOpen && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsSpecOpen(false)}
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ duration: 0.2 }}
+                            className="relative w-full max-w-lg bg-slate-900 border border-blue-500/20 rounded-2xl p-6 shadow-2xl"
+                        >
+                            <div className="flex justify-between items-center mb-6">
+                                <h3 className="text-2xl font-bold text-white">System Specifications</h3>
+                                <button
+                                    onClick={() => setIsSpecOpen(false)}
+                                    className="p-2 hover:bg-white/10 rounded-full transition-colors"
+                                >
+                                    <X className="w-5 h-5 text-gray-400" />
+                                </button>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {specs.map((spec, i) => (
+                                    <div key={i} className="p-4 rounded-xl bg-slate-950 border border-white/5 hover:border-blue-500/30 transition-colors">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <spec.icon className="w-5 h-5 text-blue-400" />
+                                            <span className="text-sm text-gray-400 font-medium">{spec.label}</span>
+                                        </div>
+                                        <div className="text-white font-semibold pl-8">{spec.value}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+        </section>
+    );
+}

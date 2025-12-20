@@ -18,13 +18,13 @@ const features = [
     icon: TrendingUp,
     title: 'Progress Tracking',
     description: 'Real-time analytics and insights into student performance. Identify strengths and areas for improvement.',
-    gradient: 'from-[hsl(var(--nuvana-emerald))] to-[hsl(var(--nuvana-cyan))]'
+    gradient: 'from-[hsl(var(--nuvana-emerald))] to-[hsl(var(--nuvana-blue))]'
   },
   {
     icon: MessageSquare,
     title: 'Instant Feedback',
     description: 'Seamless communication between students and teachers. Quick responses and collaborative learning environment.',
-    gradient: 'from-[hsl(var(--nuvana-cyan))] to-[hsl(var(--nuvana-blue))]'
+    gradient: 'from-[hsl(var(--nuvana-blue))] to-[hsl(var(--nuvana-teal))]'
   }
 ];
 
@@ -54,14 +54,13 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
   return (
     <div
       ref={cardRef}
-      className={`group relative p-8 rounded-2xl glass gradient-border hover-lift hover-glow cursor-pointer transition-all duration-500 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
+      className={`group relative p-8 rounded-2xl glass gradient-border hover-lift hover-glow cursor-pointer transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
       {/* Glow background on hover */}
       <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-      
+
       {/* Icon */}
       <div className={`relative w-16 h-16 rounded-xl bg-gradient-to-br ${feature.gradient} p-0.5 mb-6`}>
         <div className="w-full h-full rounded-xl bg-card flex items-center justify-center">
@@ -108,14 +107,13 @@ export function FeaturesSection() {
     <section className="relative py-32 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(var(--nuvana-turquoise)/0.1)_0%,_transparent_50%)]" />
-      
+
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div 
+        <div
           ref={titleRef}
-          className={`text-center max-w-3xl mx-auto mb-20 transition-all duration-1000 ${
-            titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+          className={`text-center max-w-3xl mx-auto mb-20 transition-all duration-1000 ${titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
         >
           <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary mb-6">
             Features

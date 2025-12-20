@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { PremiumDoodles } from '@/components/ui/PremiumDoodles';
 
 const previewSlides = [
   {
@@ -56,24 +57,24 @@ export function AppPreviewSection() {
   };
 
   return (
-    <section 
-      id="app-preview" 
+    <section
+      id="app-preview"
       ref={sectionRef}
       className="relative py-32 overflow-hidden"
     >
       {/* Radial glow background */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(var(--nuvana-emerald)/0.15)_0%,_transparent_60%)]" />
-      
+      <PremiumDoodles />
+
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
           <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-accent/10 text-accent mb-6">
             App Preview
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            See <span className="gradient-text">Nuvana360</span> in Action
+            See <span className="text-white">NUVANA</span><span className="text-[hsl(var(--nuvana-emerald))]">360</span> in Action
           </h2>
           <p className="text-lg text-muted-foreground">
             Experience the future of academic management with our intuitive interface.
@@ -81,14 +82,13 @@ export function AppPreviewSection() {
         </div>
 
         {/* Device Mockup */}
-        <div className={`relative max-w-5xl mx-auto transition-all duration-1000 delay-300 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+        <div className={`relative max-w-5xl mx-auto transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
           {/* Laptop Frame */}
           <div className="relative group">
             {/* Glow effect */}
             <div className="absolute -inset-4 bg-gradient-to-r from-[hsl(var(--nuvana-blue)/0.3)] via-[hsl(var(--nuvana-turquoise)/0.3)] to-[hsl(var(--nuvana-emerald)/0.3)] rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity" />
-            
+
             {/* Screen container */}
             <div className="relative glass-strong rounded-2xl p-2 md:p-4">
               {/* Browser chrome */}
@@ -110,13 +110,12 @@ export function AppPreviewSection() {
                 {previewSlides.map((slide, index) => (
                   <div
                     key={slide.title}
-                    className={`absolute inset-0 transition-all duration-500 ${
-                      index === currentSlide
-                        ? 'opacity-100 translate-x-0'
-                        : index < currentSlide
+                    className={`absolute inset-0 transition-all duration-500 ${index === currentSlide
+                      ? 'opacity-100 translate-x-0'
+                      : index < currentSlide
                         ? 'opacity-0 -translate-x-full'
                         : 'opacity-0 translate-x-full'
-                    }`}
+                      }`}
                   >
                     {/* Placeholder for actual screenshots */}
                     <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-secondary/50 to-muted/50">
@@ -159,11 +158,10 @@ export function AppPreviewSection() {
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    index === currentSlide
-                      ? 'bg-primary w-8'
-                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                  }`}
+                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentSlide
+                    ? 'bg-primary w-8'
+                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                    }`}
                 />
               ))}
             </div>

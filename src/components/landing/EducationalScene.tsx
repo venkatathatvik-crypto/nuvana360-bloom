@@ -6,7 +6,7 @@ import * as THREE from 'three';
 // Floating Book Component
 function Book({ position, rotation, color }: { position: [number, number, number]; rotation: [number, number, number]; color: string }) {
   const meshRef = useRef<THREE.Group>(null);
-  
+
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.1 + rotation[1];
@@ -34,7 +34,7 @@ function Book({ position, rotation, color }: { position: [number, number, number
 // Light Bulb (Ideas) Component
 function LightBulb({ position }: { position: [number, number, number] }) {
   const lightRef = useRef<THREE.PointLight>(null);
-  
+
   useFrame((state) => {
     if (lightRef.current) {
       lightRef.current.intensity = 1 + Math.sin(state.clock.elapsedTime * 2) * 0.3;
@@ -47,9 +47,9 @@ function LightBulb({ position }: { position: [number, number, number] }) {
         {/* Bulb */}
         <mesh>
           <sphereGeometry args={[0.25, 32, 32]} />
-          <meshStandardMaterial 
-            color="#ffd700" 
-            emissive="#ffd700" 
+          <meshStandardMaterial
+            color="#ffd700"
+            emissive="#ffd700"
             emissiveIntensity={0.5}
             transparent
             opacity={0.9}
@@ -94,7 +94,7 @@ function GraduationCap({ position }: { position: [number, number, number] }) {
 // DNA Helix (Science) Component
 function DNAHelix({ position }: { position: [number, number, number] }) {
   const groupRef = useRef<THREE.Group>(null);
-  
+
   const spheres = useMemo(() => {
     const items = [];
     for (let i = 0; i < 20; i++) {
@@ -120,9 +120,9 @@ function DNAHelix({ position }: { position: [number, number, number] }) {
         {spheres.map((sphere, i) => (
           <mesh key={i} position={sphere.pos}>
             <sphereGeometry args={[0.06, 16, 16]} />
-            <meshStandardMaterial 
-              color={sphere.color} 
-              emissive={sphere.color} 
+            <meshStandardMaterial
+              color={sphere.color}
+              emissive={sphere.color}
               emissiveIntensity={0.4}
             />
           </mesh>
@@ -180,7 +180,7 @@ function Pencil({ position }: { position: [number, number, number] }) {
 // Atom Component
 function Atom({ position }: { position: [number, number, number] }) {
   const groupRef = useRef<THREE.Group>(null);
-  
+
   useFrame((state) => {
     if (groupRef.current) {
       groupRef.current.rotation.y = state.clock.elapsedTime * 0.5;
@@ -194,9 +194,9 @@ function Atom({ position }: { position: [number, number, number] }) {
         {/* Nucleus */}
         <mesh>
           <sphereGeometry args={[0.15, 32, 32]} />
-          <meshStandardMaterial 
-            color="#10b981" 
-            emissive="#10b981" 
+          <meshStandardMaterial
+            color="#10b981"
+            emissive="#10b981"
             emissiveIntensity={0.4}
           />
         </mesh>
@@ -204,9 +204,9 @@ function Atom({ position }: { position: [number, number, number] }) {
         {[0, Math.PI / 3, -Math.PI / 3].map((rot, i) => (
           <mesh key={i} rotation={[rot, 0, 0]}>
             <torusGeometry args={[0.4, 0.01, 8, 64]} />
-            <meshStandardMaterial 
-              color="#2dd4bf" 
-              emissive="#2dd4bf" 
+            <meshStandardMaterial
+              color="#2dd4bf"
+              emissive="#2dd4bf"
               emissiveIntensity={0.3}
               transparent
               opacity={0.6}
@@ -217,9 +217,9 @@ function Atom({ position }: { position: [number, number, number] }) {
         {[0, Math.PI / 3, -Math.PI / 3].map((rot, i) => (
           <mesh key={`electron-${i}`} position={[0.4 * Math.cos(rot), 0.4 * Math.sin(rot), 0]}>
             <sphereGeometry args={[0.04, 16, 16]} />
-            <meshStandardMaterial 
-              color="#34d399" 
-              emissive="#34d399" 
+            <meshStandardMaterial
+              color="#34d399"
+              emissive="#34d399"
               emissiveIntensity={0.6}
             />
           </mesh>
@@ -282,25 +282,26 @@ function Scene() {
       <pointLight position={[5, -5, 5]} intensity={0.5} color="#10b981" />
 
       {/* Educational Objects */}
-      <Book position={[-3, 1, -2]} rotation={[0.2, 0.5, 0.1]} color="#2dd4bf" />
-      <Book position={[3.5, -0.5, -1]} rotation={[-0.1, -0.3, 0.2]} color="#10b981" />
-      <Book position={[-2, -1.5, 1]} rotation={[0.1, 0.8, -0.1]} color="#6366f1" />
-      
-      <LightBulb position={[2, 2, 0]} />
-      <LightBulb position={[-4, 0, 1]} />
-      
-      <GraduationCap position={[0, 2.5, -1]} />
-      
-      <DNAHelix position={[4, 0, -2]} />
-      
-      <NeuralNode position={[-3, -1, 2]} />
-      <NeuralNode position={[1, -2, 1]} />
-      <NeuralNode position={[3, 1.5, 1]} />
-      
-      <Pencil position={[-1.5, 1.5, 2]} />
-      <Pencil position={[2.5, -1.5, -1]} />
-      
-      <Atom position={[-2.5, 2, -1]} />
+      {/* Educational Objects - Spread out to clear center */}
+      <Book position={[-6, 2.5, -2]} rotation={[0.2, 0.5, 0.1]} color="#2dd4bf" />
+      <Book position={[6.5, -1.5, -1]} rotation={[-0.1, -0.3, 0.2]} color="#10b981" />
+      <Book position={[-5, -3, 1]} rotation={[0.1, 0.8, -0.1]} color="#6366f1" />
+
+      <LightBulb position={[5, 3, 0]} />
+      <LightBulb position={[-7, 0, 1]} />
+
+      <GraduationCap position={[0, 4.5, -2]} />
+
+      <DNAHelix position={[7, 1, -2]} />
+
+      <NeuralNode position={[-6, -1.5, 2]} />
+      <NeuralNode position={[4, -3.5, 1]} />
+      <NeuralNode position={[6, 2.5, 1]} />
+
+      <Pencil position={[-4, 3.5, 2]} />
+      <Pencil position={[5, -3, -1]} />
+
+      <Atom position={[-5.5, 3, -1]} />
 
       {/* Particles */}
       <Particles />
