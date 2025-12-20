@@ -338,3 +338,27 @@
     pointer-events: none;
   }
 }
+/* Mobile Blocker */
+@media (max-width: 1024px) {
+  body {
+    overflow: hidden;
+  }
+  #root {
+    display: none;
+  }
+}
+.mobile-blocker {
+  display: none;
+}
+@media (max-width: 1024px) {
+  .mobile-blocker {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+  }
+}

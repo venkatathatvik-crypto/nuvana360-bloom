@@ -24,7 +24,9 @@ export const EcosystemOverview: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const radius = 260; // Orbital radius in pixels
+      // Responsive Radius calculation
+      const isMobile = window.innerWidth < 768;
+      const radius = isMobile ? 55 : 260; // Micro-compact 55px radius for mobile
 
       // Initial Setup: Widgets at center, hidden, scaled down
       // using xPercent/yPercent for perfect centering without CSS transform conflicts
@@ -126,8 +128,8 @@ export const EcosystemOverview: React.FC = () => {
   // shadow-[0_0_30px_rgba(0,0,0,0.3)] (depth), backdrop-blur-2xl (premium frosting)
   const widgetClass = `
     absolute left-1/2 top-1/2 z-30 invisible 
-    flex flex-col items-center justify-center text-center w-64 p-5 
-    bg-slate-900/60 backdrop-blur-2xl border border-white/10 rounded-2xl 
+    flex flex-col items-center justify-center text-center w-24 md:w-64 p-1.5 md:p-5 
+    bg-slate-900/60 backdrop-blur-2xl border border-white/10 rounded-xl md:rounded-2xl 
     shadow-[0_8px_32px_rgb(0,0,0,0.4)] 
     group transition-all duration-300 ease-out 
     hover:-translate-y-2 hover:border-blue-400/50 hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)]
@@ -137,7 +139,7 @@ export const EcosystemOverview: React.FC = () => {
 
   // Icon Container
   const iconBgClass = `
-    flex items-center justify-center w-14 h-14 mb-4 
+    flex items-center justify-center w-8 h-8 md:w-14 md:h-14 mb-1.5 md:mb-4 
     bg-gradient-to-b from-slate-800 to-slate-900 
     border border-white/5 rounded-full 
     text-blue-400 shadow-inner
@@ -146,8 +148,8 @@ export const EcosystemOverview: React.FC = () => {
     transition-all duration-300
   `;
 
-  const titleClass = "text-base font-bold text-white tracking-wide mb-1 transition-colors group-hover:text-blue-200";
-  const descClass = "text-xs font-medium text-slate-400 group-hover:text-slate-300 transition-colors";
+  const titleClass = "text-[9px] md:text-base font-bold text-white tracking-wide mb-0.5 md:mb-1 transition-colors group-hover:text-blue-200";
+  const descClass = "text-[7px] md:text-xs font-medium text-slate-400 group-hover:text-slate-300 transition-colors leading-[1.1]";
 
   return (
     <section
@@ -172,7 +174,7 @@ export const EcosystemOverview: React.FC = () => {
 
       {/* --- VISUAL ORBIT RING (Decoration) --- */}
       {/* Matches radius=260px => diameter=520px */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full border border-blue-500/10 z-10 pointer-events-none">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110px] h-[110px] md:w-[520px] md:h-[520px] rounded-full border border-blue-500/10 z-10 pointer-events-none">
         {/* Secondary inner ring for depth */}
         <div className="absolute inset-[1px] rounded-full border border-white/5 opacity-50" />
         {/* Glowing glow effect on the ring */}
@@ -207,7 +209,7 @@ export const EcosystemOverview: React.FC = () => {
       {/* WIDGET 1: LEFT (9 o'clock) -> Nuvana Corebook */}
       <div ref={widget9Ref} className={widgetClass}>
         <div className={iconBgClass}>
-          <Tablet size={24} />
+          <Tablet size={4} />
         </div>
         <h3 className={titleClass}>Nuvana Corebook</h3>
         <p className={descClass}>Hardware device + controlled learning environment</p>
@@ -216,7 +218,7 @@ export const EcosystemOverview: React.FC = () => {
       {/* WIDGET 2: TOP (12 o'clock) -> Classroom OS */}
       <div ref={widget12Ref} className={widgetClass}>
         <div className={iconBgClass}>
-          <LayoutGrid size={24} />
+          <LayoutGrid size={4} />
         </div>
         <h3 className={titleClass}>Classroom OS</h3>
         <p className={descClass}>Student–Teacher–Admin operating system</p>
@@ -225,7 +227,7 @@ export const EcosystemOverview: React.FC = () => {
       {/* WIDGET 3: RIGHT (3 o'clock) -> Dual Intelligence */}
       <div ref={widget3Ref} className={widgetClass}>
         <div className={iconBgClass}>
-          <Brain size={24} />
+          <Brain size={4} />
         </div>
         <h3 className={titleClass}>Dual Intelligence</h3>
         <p className={descClass}>AI for teachers + AI for students</p>
@@ -234,7 +236,7 @@ export const EcosystemOverview: React.FC = () => {
       {/* WIDGET 4: BOTTOM (6 o'clock) -> NuvanaNet */}
       <div ref={widget6Ref} className={widgetClass}>
         <div className={iconBgClass}>
-          <Wifi size={24} />
+          <Wifi size={4} />
         </div>
         <h3 className={titleClass}>Nuvanet</h3>
         <p className={descClass}>Internet without infrastructure</p>
