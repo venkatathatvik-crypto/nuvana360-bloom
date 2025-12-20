@@ -209,7 +209,7 @@ export const EcosystemOverview: React.FC = () => {
       {/* WIDGET 1: LEFT (9 o'clock) -> Nuvana Corebook */}
       <div ref={widget9Ref} className={widgetClass}>
         <div className={iconBgClass}>
-          <Tablet size={4} />
+          <Tablet size={24} />
         </div>
         <h3 className={titleClass}>Nuvana Corebook</h3>
         <p className={descClass}>Hardware device + controlled learning environment</p>
@@ -218,7 +218,7 @@ export const EcosystemOverview: React.FC = () => {
       {/* WIDGET 2: TOP (12 o'clock) -> Classroom OS */}
       <div ref={widget12Ref} className={widgetClass}>
         <div className={iconBgClass}>
-          <LayoutGrid size={4} />
+          <LayoutGrid size={24} />
         </div>
         <h3 className={titleClass}>Classroom OS</h3>
         <p className={descClass}>Student–Teacher–Admin operating system</p>
@@ -227,7 +227,7 @@ export const EcosystemOverview: React.FC = () => {
       {/* WIDGET 3: RIGHT (3 o'clock) -> Dual Intelligence */}
       <div ref={widget3Ref} className={widgetClass}>
         <div className={iconBgClass}>
-          <Brain size={4} />
+          <Brain size={24} />
         </div>
         <h3 className={titleClass}>Dual Intelligence</h3>
         <p className={descClass}>AI for teachers + AI for students</p>
@@ -236,7 +236,7 @@ export const EcosystemOverview: React.FC = () => {
       {/* WIDGET 4: BOTTOM (6 o'clock) -> NuvanaNet */}
       <div ref={widget6Ref} className={widgetClass}>
         <div className={iconBgClass}>
-          <Wifi size={4} />
+          <Wifi size={24} />
         </div>
         <h3 className={titleClass}>Nuvanet</h3>
         <p className={descClass}>Internet without infrastructure</p>
