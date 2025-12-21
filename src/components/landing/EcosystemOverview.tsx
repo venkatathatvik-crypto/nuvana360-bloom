@@ -21,6 +21,20 @@ export const EcosystemOverview: React.FC = () => {
   const widget6Ref = useRef<HTMLDivElement>(null);  // Bottom
   const [currentStep, setCurrentStep] = useState(0);
   const tl = useRef<gsap.core.Timeline | null>(null);
+  const clickAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Minimal, ultra-short ambient tap
+    clickAudioRef.current = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
+    clickAudioRef.current.volume = 0.05; // Dropped volume to 5% for extreme minimalism
+  }, []);
+
+  const playClick = () => {
+    if (clickAudioRef.current) {
+      clickAudioRef.current.currentTime = 0;
+      clickAudioRef.current.play().catch(() => { });
+    }
+  };
 
   const totalSteps = 4;
 
@@ -108,12 +122,14 @@ export const EcosystemOverview: React.FC = () => {
   const nextStep = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(prev => prev + 1);
+      playClick();
     }
   };
 
   const prevStep = () => {
     if (currentStep > 0) {
       setCurrentStep(prev => prev - 1);
+      playClick();
     }
   };
 
@@ -145,9 +161,8 @@ export const EcosystemOverview: React.FC = () => {
     absolute left-1/2 top-1/2 z-30 invisible 
     flex flex-col items-center justify-center text-center w-32 md:w-64 p-3 md:p-5 
     bg-slate-900/60 backdrop-blur-2xl border border-white/10 rounded-xl md:rounded-2xl 
-    shadow-[0_8px_32px_rgb(0,0,0,0.4)] 
     group transition-all duration-300 ease-out 
-    hover:-translate-y-2 hover:border-blue-400/50 hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)]
+    hover:-translate-y-2 hover:border-primary/50
     hover:bg-slate-800/80
   `;
 
@@ -155,9 +170,8 @@ export const EcosystemOverview: React.FC = () => {
     flex items-center justify-center w-10 h-10 md:w-14 md:h-14 mb-2 md:mb-4 
     bg-gradient-to-b from-slate-800 to-slate-900 
     border border-white/5 rounded-full 
-    text-blue-400 shadow-inner
+    text-blue-400
     group-hover:scale-110 group-hover:text-blue-300 group-hover:border-blue-500/30 
-    group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] 
     transition-all duration-300
   `;
 
@@ -188,7 +202,6 @@ export const EcosystemOverview: React.FC = () => {
       {/* --- VISUAL ORBIT RING (Decoration) --- */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[520px] md:h-[520px] rounded-full border border-blue-500/10 z-10 pointer-events-none">
         <div className="absolute inset-[1px] rounded-full border border-white/5 opacity-50" />
-        <div className="absolute inset-0 rounded-full shadow-[0_0_100px_rgba(59,130,246,0.05)]" />
       </div>
 
       {/* --- CORE ELEMENT (Center) --- */}
@@ -259,7 +272,7 @@ export const EcosystemOverview: React.FC = () => {
             size="icon"
             onClick={nextStep}
             disabled={currentStep === totalSteps}
-            className="w-7 h-7 md:w-9 md:h-9 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-[0_0_20px_rgba(59,130,246,0.2)] group"
+            className="w-7 h-7 md:w-9 md:h-9 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all group"
           >
             <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-0.5 transition-transform" />
           </Button>
@@ -270,7 +283,10 @@ export const EcosystemOverview: React.FC = () => {
           {[0, 1, 2, 3, 4].map((i) => (
             <button
               key={i}
-              onClick={() => setCurrentStep(i)}
+              onClick={() => {
+                setCurrentStep(i);
+                playClick();
+              }}
               className={`h-[1.5px] md:h-[2px] rounded-full transition-all duration-500 ${currentStep === i
                 ? 'w-3 md:w-5 bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]'
                 : 'w-1 bg-white/10'

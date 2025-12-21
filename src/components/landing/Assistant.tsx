@@ -129,11 +129,11 @@ export const Assistant = () => {
                         {/* Header */}
                         <div className="flex items-center justify-between p-4 bg-primary/10 border-b border-white/5">
                             <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(var(--primary),0.4)]">
+                                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center border border-primary/20">
                                     <Bot className="h-5 w-5 text-primary-foreground" />
                                 </div>
                                 <div>
-                                    <div className="font-bold text-white text-sm">Bloom Assistant</div>
+                                    <div className="font-bold text-primary text-sm">Bloom Assistant</div>
                                     <div className="text-[10px] text-primary uppercase tracking-wider font-bold">Online Guiding</div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@ export const Assistant = () => {
                                         <div className={cn(
                                             "max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
                                             m.role === "user"
-                                                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                                                ? "bg-primary text-primary-foreground border border-primary/10"
                                                 : "bg-slate-900/80 text-gray-200 border border-white/5"
                                         )}>
                                             {m.content}
@@ -175,7 +175,7 @@ export const Assistant = () => {
                                     placeholder="Ask Bloom about Nuvanacore..."
                                     className="bg-transparent border-none text-white h-10 focus-visible:ring-0 placeholder:text-gray-500"
                                 />
-                                <Button type="submit" size="icon" className="h-9 w-9 bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:opacity-90 shrink-0">
+                                <Button type="submit" size="icon" className="h-9 w-9 bg-primary text-primary-foreground border border-primary/20 hover:opacity-90 shrink-0">
                                     <Send className="h-4 w-4" />
                                 </Button>
                             </form>
@@ -187,7 +187,7 @@ export const Assistant = () => {
                 <Button
                     onClick={() => setOpen((v) => !v)}
                     className={cn(
-                        "rounded-full h-14 px-6 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95",
+                        "rounded-full h-14 px-6 border-primary/20 transition-all duration-300 hover:scale-105 active:scale-95",
                         open ? "bg-slate-900 text-white border border-white/10" : "bg-primary text-primary-foreground"
                     )}
                 >

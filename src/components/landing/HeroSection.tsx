@@ -32,9 +32,8 @@ export function HeroSection() {
       <div className="relative z-20 container mx-auto px-4 text-center">
         <div className={`flex flex-col items-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass gradient-border mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10 mb-8">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
             <span className="text-sm font-medium text-muted-foreground">End-to-End Digital Solution</span>
@@ -42,7 +41,7 @@ export function HeroSection() {
 
           {/* Main Headline */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 px-4">
-            <span className="text-emerald-500 font-black">N</span><span className="text-white font-black">uvana</span><span className="text-white font-thin">core</span>
+            <span className="text-primary font-black">N</span><span className="text-white font-black">uvana</span><span className="text-white font-thin">core</span>
           </h1>
 
           {/* Subheadline */}

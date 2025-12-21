@@ -6,7 +6,7 @@ export function Footer() {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <span className="text-xl font-['Montserrat'] flex items-baseline tracking-tight">
-              <span className="text-emerald-500 font-black">N</span>
+              <span className="text-primary font-black">N</span>
               <span className="text-white font-bold">uvana</span>
               <span className="text-white font-thin">core</span>
             </span>

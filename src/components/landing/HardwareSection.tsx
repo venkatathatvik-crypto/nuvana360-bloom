@@ -53,7 +53,7 @@ export function HardwareSection() {
                         viewport={{ once: true }}
                         className="order-2 md:order-1"
                     >
-                        <div className="inline-block px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-6">
+                        <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
                             Hardware Layer
                         </div>
                         <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
@@ -66,7 +66,7 @@ export function HardwareSection() {
                         <div className="space-y-6">
                             {features.map((feature, idx) => (
                                 <div key={idx} className="flex gap-4">
-                                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
                                         <feature.icon size={24} />
                                     </div>
                                     <div>
@@ -78,7 +78,7 @@ export function HardwareSection() {
                         </div>
 
                         <Button
-                            className="mt-8 bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-900/20"
+                            className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20"
                             size="lg"
                             onClick={() => setIsSpecOpen(true)}
                         >
@@ -94,13 +94,13 @@ export function HardwareSection() {
                     >
                         {/* Abstract Laptop Visualization */}
                         <div className="relative w-full max-w-[500px] aspect-video">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-blue-500/20 rounded-xl blur-2xl" />
+                            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-blue-500/20 rounded-xl blur-2xl" />
                             <div className="relative w-full h-full bg-slate-900 rounded-xl border border-slate-700 shadow-2xl flex items-center justify-center overflow-hidden group">
                                 {/* Screen Content */}
                                 <div className="absolute inset-[2px] bg-slate-950 rounded-[10px] overflow-hidden">
-                                    <div className="w-full h-full bg-gradient-to-br from-slate-900 to-emerald-950/30 flex flex-col items-center justify-center">
-                                        <Tablet size={64} className="text-emerald-500/50 mb-4" />
-                                        <div className="text-emerald-200/50 font-mono text-sm uppercase tracking-widest">Nuvanacore OS</div>
+                                    <div className="w-full h-full bg-gradient-to-br from-slate-900 to-primary/20 flex flex-col items-center justify-center">
+                                        <Tablet size={64} className="text-primary/50 mb-4" />
+                                        <div className="text-primary/50 font-mono text-sm uppercase tracking-widest">Nuvanacore OS</div>
                                         <div className="text-blue-200/50 font-mono text-xs mt-1">Status: Connected Nuvanet</div>
                                     </div>
                                     {/* Glare */}
@@ -129,7 +129,7 @@ export function HardwareSection() {
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                                 transition={{ duration: 0.2 }}
-                                className="relative w-full max-w-lg bg-slate-900 border border-emerald-500/20 rounded-2xl p-6 shadow-2xl"
+                                className="relative w-full max-w-lg bg-slate-900 border border-primary/20 rounded-2xl p-6 shadow-2xl"
                             >
                                 <div className="flex justify-between items-center mb-6 text-center">
                                     <h3 className="text-2xl font-bold text-white">System Specifications</h3>
@@ -143,9 +143,9 @@ export function HardwareSection() {
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {specs.map((spec, i) => (
-                                        <div key={i} className="p-4 rounded-xl bg-slate-950 border border-white/5 hover:border-emerald-500/30 transition-colors">
+                                        <div key={i} className="p-4 rounded-xl bg-slate-950 border border-white/5 hover:border-primary/40 transition-colors">
                                             <div className="flex items-center gap-3 mb-2">
-                                                <spec.icon className="w-5 h-5 text-emerald-400" />
+                                                <spec.icon className="w-5 h-5 text-primary" />
                                                 <span className="text-sm text-gray-400 font-medium">{spec.label}</span>
                                             </div>
                                             <div className="text-white font-semibold pl-8">{spec.value}</div>

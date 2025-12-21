@@ -105,48 +105,48 @@ export const Contact = () => {
       <div className="container relative z-10">
         <div className="mx-auto max-w-3xl text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">Contact Us</h2>
-          <p className="text-lg text-emerald-100/60">Have questions? Send us a message and we'll help you get started .</p>
+          <p className="text-lg text-primary/70">Have questions? Send us a message and we'll help you get started.</p>
         </div>
-        <Card className="mx-auto max-w-3xl bg-slate-900/60 backdrop-blur-xl border-emerald-500/20 shadow-2xl shadow-emerald-900/10 p-8">
+        <Card className="mx-auto max-w-3xl bg-slate-900/60 backdrop-blur-xl border-primary/20 shadow-2xl shadow-primary/10 p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid gap-6 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-emerald-50">Name</Label>
+                <Label htmlFor="name" className="text-primary/90">Name</Label>
                 <Input
                   id="name"
                   placeholder="Your name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-slate-950/50 border-emerald-500/20 text-emerald-50 placeholder:text-emerald-500/30 focus-visible:ring-emerald-500/50"
+                  className="bg-slate-950/50 border-primary/20 text-white placeholder:text-primary/30 focus-visible:ring-primary/50"
                 />
                 {errors.name && <p className="text-red-400 text-sm">{errors.name}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-emerald-50">Email</Label>
+                <Label htmlFor="email" className="text-primary/90">Email</Label>
                 <Input
                   id="email"
                   type="email"
                   placeholder="you@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-slate-950/50 border-emerald-500/20 text-emerald-50 placeholder:text-emerald-500/30 focus-visible:ring-emerald-500/50"
+                  className="bg-slate-950/50 border-primary/20 text-white placeholder:text-primary/30 focus-visible:ring-primary/50"
                 />
                 {errors.email && <p className="text-red-400 text-sm">{errors.email}</p>}
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="message" className="text-emerald-50">Message</Label>
+              <Label htmlFor="message" className="text-primary/90">Message</Label>
               <Textarea
                 id="message"
                 placeholder="Tell us about your goals, timelines, or any questions you have."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="min-h-[140px] bg-slate-950/50 border-emerald-500/20 text-emerald-50 placeholder:text-emerald-500/30 focus-visible:ring-emerald-500/50"
+                className="min-h-[140px] bg-slate-950/50 border-primary/20 text-white placeholder:text-primary/30 focus-visible:ring-primary/50"
               />
               {errors.message && <p className="text-red-400 text-sm">{errors.message}</p>}
             </div>
             <div className="flex items-center justify-end gap-3">
-              <Button type="submit" disabled={loading} className="bg-emerald-600 text-white hover:bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)] border border-emerald-400/20">
+              <Button type="submit" disabled={loading} className="bg-primary text-primary-foreground hover:bg-primary/90 border border-primary/20">
                 {loading ? "Sending..." : "Send Message"}
               </Button>
             </div>

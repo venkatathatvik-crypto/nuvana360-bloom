@@ -1,3 +1,5 @@
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 
@@ -106,12 +108,12 @@ export const FAQ = () => {
           {/* Internal Progress Line */}
           <div className="absolute -left-4 md:-left-8 top-0 bottom-0 w-[2px] bg-white/5 rounded-full overflow-hidden">
             <motion.div
-              className="w-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)] origin-top"
+              className="w-full bg-primary origin-top"
               style={{ scaleY: scrollProgress, height: '100%' }}
             />
           </div>
 
-          <Card className="bg-slate-900/60 backdrop-blur-xl border-emerald-500/20 shadow-2xl shadow-emerald-900/10 overflow-hidden max-h-[60vh] flex flex-col">
+          <Card className="bg-slate-900/60 backdrop-blur-xl border-primary/20 shadow-xl overflow-hidden max-h-[60vh] flex flex-col">
             <div
               ref={scrollRef}
               onScroll={handleInternalScroll}
@@ -124,11 +126,11 @@ export const FAQ = () => {
               `}} />
               <Accordion type="single" collapsible className="w-full">
                 {faqItems.map((item, idx) => (
-                  <AccordionItem key={idx} value={`item-${idx}`} className="border-emerald-500/10 px-6">
-                    <AccordionTrigger className="text-emerald-50 hover:text-emerald-400 transition-colors text-left py-4">
+                  <AccordionItem key={idx} value={`item-${idx}`} className="border-primary/10 px-6">
+                    <AccordionTrigger className="text-white hover:text-primary transition-colors text-left py-4 font-bold md:text-xl">
                       {item.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-slate-300 pb-4 leading-relaxed">
+                    <AccordionContent className="text-slate-200 pb-4 leading-relaxed">
                       {item.answer}
                     </AccordionContent>
                   </AccordionItem>

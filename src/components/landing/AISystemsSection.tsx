@@ -7,7 +7,7 @@ export function AISystemsSection() {
     return (
         <section className="h-screen flex items-center py-12 bg-background relative overflow-hidden snap-start">
             {/* Background Glow */}
-            <div className="absolute top-1/2 left-0 w-1/3 h-1/2 bg-teal-500/10 blur-[100px]" />
+            <div className="absolute top-1/2 left-0 w-1/3 h-1/2 bg-primary/10 blur-[100px]" />
             <div className="absolute bottom-0 right-0 w-1/3 h-1/2 bg-blue-500/10 blur-[100px]" />
 
             {/* Blenders */}
@@ -18,7 +18,7 @@ export function AISystemsSection() {
 
             <div className="container mx-auto px-4 scale-95 md:scale-100">
                 <div className="text-center mb-8">
-                    <div className="inline-block px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 text-sm font-medium mb-3">
+                    <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-3">
                         AI Layer
                     </div>
                     <h2 className="text-3xl md:text-5xl font-bold mb-3 text-white">
@@ -38,14 +38,14 @@ export function AISystemsSection() {
                         viewport={{ once: true }}
                         className="group relative"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/20 to-emerald-900/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                        <div className="relative h-full p-6 md:p-8 rounded-3xl glass border border-emerald-500/30 bg-slate-900/60 overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/40 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                        <div className="relative h-full p-6 md:p-8 rounded-3xl glass border border-primary/30 bg-slate-900/60 overflow-hidden">
                             <div className="relative z-10">
-                                <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 mb-6 shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-6 border border-primary/20">
                                     <PenTool size={24} className="animate-pulse" />
                                 </div>
                                 <h3 className="text-2xl font-bold text-white mb-1">Drona by nuvana</h3>
-                                <p className="text-emerald-200 mb-6 font-medium text-sm">AI Teaching Support</p>
+                                <p className="text-primary/70 mb-6 font-medium text-sm">AI Teaching Support</p>
 
                                 <ul className="space-y-3">
                                     {[
@@ -56,7 +56,7 @@ export function AISystemsSection() {
                                         'Lesson & Assessment Support'
                                     ].map((item, i) => (
                                         <li key={i} className="flex items-start gap-3 text-gray-300 text-sm md:text-base">
-                                            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 drop-shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
+                                            <CheckCircle2 className="w-5 h-5 text-primary shrink-0 drop-shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
                                             <span>{item}</span>
                                         </li>
                                     ))}
@@ -75,7 +75,7 @@ export function AISystemsSection() {
                         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-blue-900/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
                         <div className="relative h-full p-6 md:p-8 rounded-3xl glass border border-blue-500/30 bg-slate-900/60 overflow-hidden">
                             <div className="relative z-10">
-                                <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 mb-6 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                                <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 mb-6 border border-blue-500/20">
                                     <Brain size={24} className="animate-pulse" />
                                 </div>
                                 <h3 className="text-2xl font-bold text-white mb-1">Archer by nuvana</h3>
