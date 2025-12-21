@@ -21,21 +21,6 @@ export const EcosystemOverview: React.FC = () => {
   const widget6Ref = useRef<HTMLDivElement>(null);  // Bottom
   const [currentStep, setCurrentStep] = useState(0);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  const clickAudioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    // Minimal, ultra-short ambient tap
-    clickAudioRef.current = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
-    clickAudioRef.current.volume = 0.25; // Balanced for clarity
-  }, []);
-
-  const playClick = () => {
-    if (clickAudioRef.current) {
-      clickAudioRef.current.currentTime = 0;
-      clickAudioRef.current.play().catch(() => { });
-    }
-  };
-
   const totalSteps = 4;
 
   useEffect(() => {
@@ -122,19 +107,23 @@ export const EcosystemOverview: React.FC = () => {
   const nextStep = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(prev => prev + 1);
-      playClick();
     }
   };
 
   const prevStep = () => {
     if (currentStep > 0) {
       setCurrentStep(prev => prev - 1);
-      playClick();
     }
   };
 
   // Keyboard Navigation Support
   useEffect(() => {
+    const playClickSound = () => {
+      const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
+      audio.volume = 0.25;
+      audio.play().catch(() => { });
+    };
+
     const handleEcosystemKeyDown = (e: KeyboardEvent) => {
       // Only trigger if this section is visible (using a simple scroll check or observer)
       if (!containerRef.current) return;
@@ -145,8 +134,10 @@ export const EcosystemOverview: React.FC = () => {
       if (!isVisible) return;
 
       if (e.key === 'ArrowRight') {
+        playClickSound();
         nextStep();
       } else if (e.key === 'ArrowLeft') {
+        playClickSound();
         prevStep();
       }
     };
@@ -285,7 +276,6 @@ export const EcosystemOverview: React.FC = () => {
               key={i}
               onClick={() => {
                 setCurrentStep(i);
-                playClick();
               }}
               className={`h-[1.5px] md:h-[2px] rounded-full transition-all duration-500 ${currentStep === i
                 ? 'w-3 md:w-5 bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]'

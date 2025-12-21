@@ -16,14 +16,14 @@ export function ClassroomOSSection() {
             id: 'teacher',
             title: 'For Teachers',
             icon: Users,
-            features: ['At-Risk Visibility', 'Automated Reporting', 'Lesson Tools', 'Performance Metrics'],
+            features: ['At-Risk Student Visibility', 'Automated Reporting', 'Lesson Tools', 'Performance Metrics'],
             color: 'bg-blue-500/10 text-blue-400 border-blue-500/20'
         },
         {
             id: 'admin',
             title: 'For Admins',
             icon: School,
-            features: ['Academic Visibility', 'Policy Control', 'Institution Oversight', 'Data Analytics'],
+            features: ['Academic Performance Visibility', 'Policy Control', 'Institution Oversight', 'Data Analytics'],
             color: 'bg-purple-500/10 text-purple-400 border-purple-500/20'
         }
     ];

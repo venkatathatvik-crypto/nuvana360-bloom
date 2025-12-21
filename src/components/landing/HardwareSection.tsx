@@ -100,7 +100,7 @@ export function HardwareSection() {
                                 <div className="absolute inset-[2px] bg-slate-950 rounded-[10px] overflow-hidden">
                                     <div className="w-full h-full bg-gradient-to-br from-slate-900 to-primary/20 flex flex-col items-center justify-center">
                                         <Tablet size={64} className="text-primary/50 mb-4" />
-                                        <div className="text-primary/50 font-mono text-sm uppercase tracking-widest">Nuvanacore OS</div>
+                                        <div className="text-primary/50 font-mono text-sm uppercase tracking-widest">Nuvana360 Classroom OS</div>
                                         <div className="text-blue-200/50 font-mono text-xs mt-1">Status: Connected Nuvanet</div>
                                     </div>
                                     {/* Glare */}
@@ -114,7 +114,13 @@ export function HardwareSection() {
 
             {/* Spec Widget Modal inside a Portal */}
             {typeof document !== 'undefined' && createPortal(
-                <AnimatePresence>
+                <AnimatePresence onExitComplete={() => {
+                    // Restore focus to main container after modal closes
+                    const mainContainer = document.querySelector('main');
+                    if (mainContainer instanceof HTMLElement) {
+                        mainContainer.focus({ preventScroll: true });
+                    }
+                }}>
                     {isSpecOpen && (
                         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
                             <motion.div

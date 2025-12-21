@@ -34,15 +34,15 @@ const KNOWLEDGE_BASE = [
     },
     {
         keywords: ["pricing", "cost", "how much", "structured"],
-        answer: "Pricing is structured based on the number of students and hardware units. For a specific quote, please use the Contact section or reach out to Shriniketan directly."
+        answer: "Pricing is structured based on the number of students and hardware units. For a specific quote, please use the Contact section or reach out to the Nuvanacore team directly."
     },
     {
         keywords: ["support", "help", "warranty", "broken"],
         answer: "We offer dedicated support lines. Critical issues are resolved within 24 hours, and non-critical support within 48 hours."
     },
     {
-        keywords: ["contact", "shriniketan", "email", "reach"],
-        answer: "You can reach out via the Contact form at the bottom of the page. Shriniketan and our team will get back to you promptly!"
+        keywords: ["contact", "email", "reach"],
+        answer: "You can reach out via the Contact form at the bottom of the page. The Nuvanacore team will get back to you promptly!"
     },
     {
         keywords: ["who are you", "your name", "bloom"],
@@ -111,13 +111,14 @@ export const Assistant = () => {
     };
 
     const QuickButton = ({ label, value }: { label: string; value: string }) => (
-        <button
-            type="button"
+        <Button
+            variant="outline"
+            size="sm"
             className="h-8 px-3 rounded-md bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors text-xs font-medium"
             onClick={() => send(value)}
         >
             {label}
-        </button>
+        </Button>
     );
 
     return (

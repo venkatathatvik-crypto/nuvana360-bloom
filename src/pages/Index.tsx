@@ -13,6 +13,7 @@ import { FAQ } from '@/components/landing/FAQ';
 import { Contact } from '@/components/landing/Contact';
 import Assistant from '@/components/landing/Assistant';
 import { Button } from '@/components/ui/button';
+import { HelpCircle } from 'lucide-react';
 
 const Index = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -30,14 +31,64 @@ const Index = () => {
   // Audio References
   const lastSectionRef = useRef(0);
   const scrollAudioRef = useRef<HTMLAudioElement | null>(null);
+  const clickAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Short Scroll Whoosh (User's Air Hit Sound)
+    // 1. Short Scroll Whoosh (User's Air Hit Sound)
     scrollAudioRef.current = new Audio('/mixkit-air-in-a-hit-2161.wav');
     scrollAudioRef.current.volume = 0.8;
 
+    // 2. Pre-load Global Button Click Sound for instant playback
+    clickAudioRef.current = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
+    clickAudioRef.current.volume = 0.25;
+    clickAudioRef.current.load(); // Pre-load the audio
+
+    const playClick = () => {
+      if (clickAudioRef.current) {
+        clickAudioRef.current.currentTime = 0;
+        clickAudioRef.current.play().catch(() => { });
+      }
+    };
+
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Trigger if it's a button, inside a button, or looks like a button
+      if (target.closest('button') || target.closest('[role="button"]') || target.classList.contains('button-glow')) {
+        playClick();
+      }
+    };
+
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      // Ignore if typing in an input or textarea
+      if (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable ||
+        target.closest('input') ||
+        target.closest('textarea')
+      ) {
+        return;
+      }
+
+      // Removed space key from navigation to allow typing in forms
+      const navKeys = ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End'];
+      if (navKeys.includes(e.key)) {
+        // Ensure the scroll container has focus for snapping to work correctly
+        if (document.activeElement !== containerRef.current) {
+          containerRef.current?.focus({ preventScroll: true });
+        }
+      }
+    };
+
+    window.addEventListener('click', handleGlobalClick);
+    window.addEventListener('keydown', handleGlobalKeyDown);
+
     return () => {
       scrollAudioRef.current?.pause();
+      clickAudioRef.current?.pause();
+      window.removeEventListener('click', handleGlobalClick);
+      window.removeEventListener('keydown', handleGlobalKeyDown);
     };
   }, []);
 
@@ -83,16 +134,14 @@ const Index = () => {
 
   // Professional Keyboard Navigation Handler
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (!containerRef.current) return;
+    // This is now handled by the global window listener but we keep it here as a backup
+    // if the container is already focused.
+  };
 
-    // List of keys we want to capture for section-to-section navigation
-    const navKeys = ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '];
-
-    if (navKeys.includes(e.key)) {
-      // Small delay to allow the browser's native snapping to kick in if it's already focused
-      // Otherwise, we can manually trigger a scroll if needed, but standard snapping 
-      // is most reliable once the element has focus.
-      containerRef.current.focus();
+  const scrollToFAQ = () => {
+    const faqElement = document.getElementById('faq');
+    if (faqElement) {
+      faqElement.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -105,6 +154,19 @@ const Index = () => {
           style={{ scaleY, height: '100%' }}
         />
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none bg-emerald-500/10" />
+
+        {/* Futuristic FAQ Scroll Button */}
+        <div className="absolute top-1/2 -left-14 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">
+          <Button
+            size="icon"
+            variant="outline"
+            onClick={scrollToFAQ}
+            className="w-11 h-11 rounded-full bg-slate-900/95 border-2 border-emerald-500/60 text-emerald-400 hover:bg-emerald-500 hover:text-white shadow-[0_0_20px_rgba(16,185,129,0.4)] backdrop-blur-md animate-pulse-glow hover:scale-110 transition-all"
+            title="Scroll to FAQ"
+          >
+            <HelpCircle className="h-5 w-5" />
+          </Button>
+        </div>
       </div>
 
 

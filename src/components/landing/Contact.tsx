@@ -45,7 +45,7 @@ export const Contact = () => {
           message: message,
           subject: `New Bloom Landing Page Contact: ${name}`,
           from_name: "Bloom Website Contact",
-          // The email recipient is Shriniketan@nuvanacore.com which should be configured in Web3Forms dashboard for this key
+          // The email recipient should be configured in Web3Forms dashboard for this key
         }),
       });
 
@@ -53,7 +53,7 @@ export const Contact = () => {
       if (result.success) {
         toast({
           title: "Message sent",
-          description: "Thanks for reaching out! Shriniketan will get back to you soon.",
+          description: "Thanks for reaching out! The Nuvanacore team will get back to you soon.",
         });
         setName("");
         setEmail("");

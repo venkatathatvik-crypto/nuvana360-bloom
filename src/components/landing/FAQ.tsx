@@ -1,7 +1,9 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { ChevronUp, ChevronDown } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export type FaqItem = { question: string; answer: string };
 
@@ -72,6 +74,18 @@ export const FAQ = () => {
     }
   };
 
+  const scrollFAQUp = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ top: -200, behavior: 'smooth' });
+    }
+  };
+
+  const scrollFAQDown = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ top: 200, behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="faq" className="h-screen flex items-center relative py-12 bg-gradient-to-b from-slate-950 via-[#020817] to-slate-950 overflow-hidden snap-start">
       {/* Seamless Transition Blender (Top) */}
@@ -105,12 +119,38 @@ export const FAQ = () => {
         </div>
 
         <div className="mx-auto max-w-3xl relative">
-          {/* Internal Progress Line */}
+          {/* Internal Progress Line with Scroll Buttons */}
           <div className="absolute -left-4 md:-left-8 top-0 bottom-0 w-[2px] bg-white/5 rounded-full overflow-hidden">
             <motion.div
               className="w-full bg-primary origin-top"
               style={{ scaleY: scrollProgress, height: '100%' }}
             />
+          </div>
+
+          {/* Scroll Up Button */}
+          <div className="absolute -left-8 md:-left-12 top-0">
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={scrollFAQUp}
+              className="w-7 h-7 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-300 backdrop-blur-sm transition-all"
+              title="Scroll FAQ Up"
+            >
+              <ChevronUp className="h-4 w-4" />
+            </Button>
+          </div>
+
+          {/* Scroll Down Button */}
+          <div className="absolute -left-7 md:-left-11 bottom-0">
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={scrollFAQDown}
+              className="w-7 h-7 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-300 backdrop-blur-sm transition-all"
+              title="Scroll FAQ Down"
+            >
+              <ChevronDown className="h-4 w-4" />
+            </Button>
           </div>
 
           <style dangerouslySetInnerHTML={{
