@@ -403,7 +403,6 @@
 
   /* Target all direct children components that are meant to be full sections */
   main>section,
-  main>footer,
   main>div[class*="section"],
   main>div[id],
   .snap-start {
@@ -414,5 +413,13 @@
     flex-shrink: 0;
     position: relative;
     /* Ensure stable coordinate system */
+  }
+
+  /* Footer specifically snaps to the bottom without taking full height */
+  main>footer {
+    scroll-snap-align: end;
+    scroll-snap-stop: always;
+    width: 100%;
+    flex-shrink: 0;
   }
 }

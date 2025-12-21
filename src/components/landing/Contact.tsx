@@ -105,7 +105,7 @@ export const Contact = () => {
       <div className="container relative z-10">
         <div className="mx-auto max-w-3xl text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">Contact Us</h2>
-          <p className="text-lg text-emerald-100/60">Have questions? Send us a message and we'll help you get started with Bloom.</p>
+          <p className="text-lg text-emerald-100/60">Have questions? Send us a message and we'll help you get started .</p>
         </div>
         <Card className="mx-auto max-w-3xl bg-slate-900/60 backdrop-blur-xl border-emerald-500/20 shadow-2xl shadow-emerald-900/10 p-8">
           <form onSubmit={handleSubmit} className="space-y-6">

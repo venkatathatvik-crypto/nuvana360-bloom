@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { HeroSection } from '@/components/landing/HeroSection';
 import { EcosystemOverview } from '@/components/landing/EcosystemOverview';
@@ -15,6 +15,7 @@ import Assistant from '@/components/landing/Assistant';
 
 const Index = () => {
   const containerRef = useRef<HTMLElement>(null);
+
   const { scrollYProgress } = useScroll({
     container: containerRef,
   });
@@ -24,6 +25,29 @@ const Index = () => {
     damping: 30,
     restDelta: 0.001
   });
+
+  // Ensure keyboard focus for snapping to work with arrow keys
+  useEffect(() => {
+    const focusMain = () => containerRef.current?.focus();
+    focusMain();
+    window.addEventListener('click', focusMain);
+    return () => window.removeEventListener('click', focusMain);
+  }, []);
+
+  // Professional Keyboard Navigation Handler
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!containerRef.current) return;
+
+    // List of keys we want to capture for section-to-section navigation
+    const navKeys = ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '];
+
+    if (navKeys.includes(e.key)) {
+      // Small delay to allow the browser's native snapping to kick in if it's already focused
+      // Otherwise, we can manually trigger a scroll if needed, but standard snapping 
+      // is most reliable once the element has focus.
+      containerRef.current.focus();
+    }
+  };
 
   return (
     <>
@@ -38,7 +62,9 @@ const Index = () => {
 
       <main
         ref={containerRef}
-        className="bg-background overflow-x-hidden"
+        tabIndex={-1}
+        onKeyDown={handleKeyDown}
+        className="bg-background overflow-x-hidden outline-none"
       >
         <HeroSection />
         <EcosystemOverview />
