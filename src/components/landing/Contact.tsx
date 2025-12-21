@@ -29,20 +29,55 @@ export const Contact = () => {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
-    // Simulate sending. Replace with your API call.
-    await new Promise((res) => setTimeout(res, 1000));
-    setLoading(false);
-    toast({
-      title: "Message sent",
-      description: "Thanks for reaching out! Our team will get back to you soon.",
-    });
-    setName("");
-    setEmail("");
-    setMessage("");
+
+    try {
+      // Using Web3Forms for reliable email delivery without a custom backend
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "075c3f3f-2b50-482f-8700-6532881b4d08",
+          name: name,
+          email: email,
+          message: message,
+          subject: `New Bloom Landing Page Contact: ${name}`,
+          from_name: "Bloom Website Contact",
+          // The email recipient is Shriniketan@nuvanacore.com which should be configured in Web3Forms dashboard for this key
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        toast({
+          title: "Message sent",
+          description: "Thanks for reaching out! Shriniketan will get back to you soon.",
+        });
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        toast({
+          title: "Submission Error",
+          description: result.message || "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Connection Error",
+        description: "Failed to reach the server. Please check your internet connection.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <section id="contact" className="relative py-24 bg-gradient-to-b from-slate-950 to-[#020617] overflow-hidden">
+    <section id="contact" className="min-h-screen flex items-center relative py-24 bg-gradient-to-b from-slate-950 to-[#020617] overflow-hidden snap-start">
       {/* Top Transition Blender */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-slate-950 to-transparent z-10 pointer-events-none" />
 

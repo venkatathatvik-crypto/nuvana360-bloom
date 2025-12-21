@@ -15,7 +15,7 @@ export const faqItems: FaqItem[] = [
       "No. We provide an end-to-end solution covering hardware, software, and connectivity under a single vendor model.",
   },
   {
-    question: "Who manages the internet and SIM infrastructure?",
+    question: "Who manages the internet infrastructure?",
     answer:
       "We manage connectivity as part of the solution, including monitoring uptime and usage.",
   },
@@ -60,7 +60,7 @@ import { PremiumDoodles } from "@/components/ui/PremiumDoodles";
 
 export const FAQ = () => {
   return (
-    <section id="faq" className="relative py-24 bg-gradient-to-b from-slate-950 via-[#020817] to-slate-950 overflow-hidden">
+    <section id="faq" className="min-h-screen flex items-center relative py-24 bg-gradient-to-b from-slate-950 via-[#020817] to-slate-950 overflow-hidden snap-start">
       {/* Seamless Transition Blender (Top) */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
 

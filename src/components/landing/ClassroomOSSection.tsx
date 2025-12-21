@@ -29,7 +29,7 @@ export function ClassroomOSSection() {
     ];
 
     return (
-        <section className="py-24 bg-gradient-to-b from-background to-blue-950/10 relative overflow-hidden">
+        <section className="min-h-screen flex items-center py-24 bg-gradient-to-b from-background to-blue-950/10 relative overflow-hidden snap-start">
             {/* Blenders */}
             <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[hsl(var(--background))] to-transparent z-20 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[hsl(var(--background))] to-transparent z-20 pointer-events-none" />

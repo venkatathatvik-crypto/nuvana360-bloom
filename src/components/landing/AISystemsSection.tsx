@@ -5,7 +5,7 @@ import { PremiumDoodles } from '@/components/ui/PremiumDoodles';
 
 export function AISystemsSection() {
     return (
-        <section className="py-24 bg-background relative overflow-hidden">
+        <section className="min-h-screen flex items-center py-24 bg-background relative overflow-hidden snap-start">
             {/* Background Glow */}
             <div className="absolute top-1/2 left-0 w-1/3 h-1/2 bg-teal-500/10 blur-[100px]" />
             <div className="absolute bottom-0 right-0 w-1/3 h-1/2 bg-blue-500/10 blur-[100px]" />

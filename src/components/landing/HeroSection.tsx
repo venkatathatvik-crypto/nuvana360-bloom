@@ -37,19 +37,18 @@ export function HeroSection() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            <span className="text-sm font-medium text-muted-foreground">End-to-End Digital Learning</span>
+            <span className="text-sm font-medium text-muted-foreground">End-to-End Digital Solution</span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-3">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 px-4">
             <span className="text-emerald-500 font-black">N</span><span className="text-white font-black">uvana</span><span className="text-white font-thin">core</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl lg:text-3xl text-foreground/90 font-light max-w-4xl mx-auto leading-relaxed mb-8">
-            built to work together, not stitched together. <br className="hidden md:block" />
-            <span className="text-primary font-normal">Hardware + OS + AI + Internet</span> <br className="hidden md:block" />
-
+          <p className="text-lg md:text-xl lg:text-2xl text-foreground/90 font-light max-w-[30ch] md:max-w-2xl leading-relaxed mb-10 px-4">
+            Built to work together, not stitched together. <br className="hidden md:block" />
+            <span className="text-primary font-normal">Hardware + OS + AI + Internet</span>
           </p>
 
           {/* CTA Buttons */}
