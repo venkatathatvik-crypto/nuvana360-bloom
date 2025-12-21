@@ -59,6 +59,17 @@ export const faqItems: FaqItem[] = [
 import { PremiumDoodles } from "@/components/ui/PremiumDoodles";
 
 export const FAQ = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const handleInternalScroll = () => {
+    if (scrollRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+      const progress = scrollTop / (scrollHeight - clientHeight);
+      setScrollProgress(progress);
+    }
+  };
+
   return (
     <section id="faq" className="h-screen flex items-center relative py-12 bg-gradient-to-b from-slate-950 via-[#020817] to-slate-950 overflow-hidden snap-start">
       {/* Seamless Transition Blender (Top) */}
@@ -91,22 +102,41 @@ export const FAQ = () => {
           <p className="text-lg text-emerald-100/60">Quick answers about Nuvana's features and onboarding.</p>
         </div>
 
-        <Card className="mx-auto max-w-3xl bg-slate-900/60 backdrop-blur-xl border-emerald-500/20 shadow-2xl shadow-emerald-900/10 overflow-hidden max-h-[60vh] flex flex-col">
-          <div className="overflow-y-auto scrollbar-hide flex-1">
-            <Accordion type="single" collapsible className="w-full">
-              {faqItems.map((item, idx) => (
-                <AccordionItem key={idx} value={`item-${idx}`} className="border-emerald-500/10 px-6">
-                  <AccordionTrigger className="text-emerald-50 hover:text-emerald-400 transition-colors text-left py-4">
-                    {item.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-slate-300 pb-4 leading-relaxed">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+        <div className="mx-auto max-w-3xl relative">
+          {/* Internal Progress Line */}
+          <div className="absolute -left-4 md:-left-8 top-0 bottom-0 w-[2px] bg-white/5 rounded-full overflow-hidden">
+            <motion.div
+              className="w-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)] origin-top"
+              style={{ scaleY: scrollProgress, height: '100%' }}
+            />
           </div>
-        </Card>
+
+          <Card className="bg-slate-900/60 backdrop-blur-xl border-emerald-500/20 shadow-2xl shadow-emerald-900/10 overflow-hidden max-h-[60vh] flex flex-col">
+            <div
+              ref={scrollRef}
+              onScroll={handleInternalScroll}
+              className="overflow-y-auto flex-1 p-2 md:p-4 scrollbar-none"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              <style dangerouslySetInnerHTML={{
+                __html: `
+                .scrollbar-none::-webkit-scrollbar { display: none; }
+              `}} />
+              <Accordion type="single" collapsible className="w-full">
+                {faqItems.map((item, idx) => (
+                  <AccordionItem key={idx} value={`item-${idx}`} className="border-emerald-500/10 px-6">
+                    <AccordionTrigger className="text-emerald-50 hover:text-emerald-400 transition-colors text-left py-4">
+                      {item.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-slate-300 pb-4 leading-relaxed">
+                      {item.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </Card>
+        </div>
       </div>
 
       {/* Bottom Blender */}

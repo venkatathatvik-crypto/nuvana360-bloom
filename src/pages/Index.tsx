@@ -28,10 +28,25 @@ const Index = () => {
 
   // Ensure keyboard focus for snapping to work with arrow keys
   useEffect(() => {
-    const focusMain = () => containerRef.current?.focus();
+    const focusMain = (e?: MouseEvent) => {
+      // Don't steal focus if clicking on interactive elements
+      const target = e?.target as HTMLElement;
+      if (
+        target?.tagName === 'INPUT' ||
+        target?.tagName === 'TEXTAREA' ||
+        target?.tagName === 'BUTTON' ||
+        target?.closest('input') ||
+        target?.closest('textarea') ||
+        target?.closest('button')
+      ) {
+        return;
+      }
+      containerRef.current?.focus();
+    };
+
     focusMain();
-    window.addEventListener('click', focusMain);
-    return () => window.removeEventListener('click', focusMain);
+    window.addEventListener('mousedown', focusMain);
+    return () => window.removeEventListener('mousedown', focusMain);
   }, []);
 
   // Professional Keyboard Navigation Handler
