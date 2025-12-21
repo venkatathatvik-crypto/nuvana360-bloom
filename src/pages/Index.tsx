@@ -53,8 +53,8 @@ const Index = () => {
         <Contact />
         {/* CTASection removed */}
         <Footer />
-        <Assistant />
       </main>
+      <Assistant />
     </>
   );
 };

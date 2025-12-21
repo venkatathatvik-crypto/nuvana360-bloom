@@ -146,7 +146,7 @@ export const EcosystemOverview: React.FC = () => {
     <section
       id="ecosystem-overview"
       ref={containerRef}
-      className="relative h-screen w-full flex items-center justify-center bg-[#020617] overflow-hidden perspective-1000"
+      className="relative h-screen w-full flex items-center justify-center bg-[#020617] overflow-hidden perspective-1000 snap-start"
     >
       {/* --- CINEMATIC BACKGROUND --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">

@@ -25,7 +25,8 @@ export function AISystemsSection() {
                         Dual Intelligence Systems
                     </h2>
                     <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                        Specialized AI assistants ensuring every teacher is supported and every student is guided.
+                        Specialized AI assistants ensuring every teacher is supported
+                        and every student is guided.
                     </p>
                 </div>
 

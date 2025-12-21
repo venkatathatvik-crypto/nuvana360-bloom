@@ -17,7 +17,7 @@ export function HeroSection() {
   };
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden snap-start">
       {/* 3D Background Scene */}
       <EducationalScene />
 
