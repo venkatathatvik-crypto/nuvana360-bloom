@@ -60,7 +60,7 @@ import { PremiumDoodles } from "@/components/ui/PremiumDoodles";
 
 export const FAQ = () => {
   return (
-    <section id="faq" className="min-h-screen flex items-center relative py-24 bg-gradient-to-b from-slate-950 via-[#020817] to-slate-950 overflow-hidden snap-start">
+    <section id="faq" className="h-screen flex items-center relative py-12 bg-gradient-to-b from-slate-950 via-[#020817] to-slate-950 overflow-hidden snap-start">
       {/* Seamless Transition Blender (Top) */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
 
@@ -86,24 +86,26 @@ export const FAQ = () => {
       </div>
 
       <div className="container relative z-10">
-        <div className="mx-auto max-w-3xl text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">Frequently Asked Questions</h2>
-          <p className="text-lg text-emerald-100/60">Quick answers about Nuvana's experience, features, and onboarding.</p>
+        <div className="mx-auto max-w-3xl text-center mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">Frequently Asked Questions</h2>
+          <p className="text-lg text-emerald-100/60">Quick answers about Nuvana's features and onboarding.</p>
         </div>
 
-        <Card className="mx-auto max-w-3xl bg-slate-900/60 backdrop-blur-xl border-emerald-500/20 shadow-2xl shadow-emerald-900/10">
-          <Accordion type="single" collapsible className="w-full">
-            {faqItems.map((item, idx) => (
-              <AccordionItem key={idx} value={`item-${idx}`} className="border-emerald-500/10 px-6">
-                <AccordionTrigger className="text-emerald-50 hover:text-emerald-400 transition-colors text-left py-6">
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-slate-300 pb-6 leading-relaxed">
-                  {item.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+        <Card className="mx-auto max-w-3xl bg-slate-900/60 backdrop-blur-xl border-emerald-500/20 shadow-2xl shadow-emerald-900/10 overflow-hidden max-h-[60vh] flex flex-col">
+          <div className="overflow-y-auto scrollbar-hide flex-1">
+            <Accordion type="single" collapsible className="w-full">
+              {faqItems.map((item, idx) => (
+                <AccordionItem key={idx} value={`item-${idx}`} className="border-emerald-500/10 px-6">
+                  <AccordionTrigger className="text-emerald-50 hover:text-emerald-400 transition-colors text-left py-4">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-slate-300 pb-4 leading-relaxed">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
         </Card>
       </div>
 

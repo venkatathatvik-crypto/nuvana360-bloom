@@ -77,7 +77,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="min-h-screen flex items-center relative py-24 bg-gradient-to-b from-slate-950 to-[#020617] overflow-hidden snap-start">
+    <section id="contact" className="h-screen flex items-center relative py-12 bg-gradient-to-b from-slate-950 to-[#020617] overflow-hidden snap-start">
       {/* Top Transition Blender */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-slate-950 to-transparent z-10 pointer-events-none" />
 

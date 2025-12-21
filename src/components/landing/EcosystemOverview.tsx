@@ -117,6 +117,28 @@ export const EcosystemOverview: React.FC = () => {
     }
   };
 
+  // Keyboard Navigation Support
+  useEffect(() => {
+    const handleEcosystemKeyDown = (e: KeyboardEvent) => {
+      // Only trigger if this section is visible (using a simple scroll check or observer)
+      if (!containerRef.current) return;
+
+      const rect = containerRef.current.getBoundingClientRect();
+      const isVisible = rect.top >= -rect.height / 2 && rect.bottom <= window.innerHeight + rect.height / 2;
+
+      if (!isVisible) return;
+
+      if (e.key === 'ArrowRight') {
+        nextStep();
+      } else if (e.key === 'ArrowLeft') {
+        prevStep();
+      }
+    };
+
+    window.addEventListener('keydown', handleEcosystemKeyDown);
+    return () => window.removeEventListener('keydown', handleEcosystemKeyDown);
+  }, [currentStep]); // Re-bind when currentStep changes to have access to latest state
+
   // --- PREMIUM UI STYLING ---
 
   const widgetClass = `

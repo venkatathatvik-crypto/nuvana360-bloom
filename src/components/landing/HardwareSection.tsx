@@ -36,7 +36,7 @@ export function HardwareSection() {
     ];
 
     return (
-        <section className="min-h-screen flex items-center py-24 bg-background relative overflow-hidden snap-start">
+        <section className="h-screen flex items-center py-24 bg-background relative overflow-hidden snap-start">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-1/3 h-full bg-emerald-900/10 skew-x-12 blur-3xl" />
             <PremiumDoodles />
@@ -101,7 +101,7 @@ export function HardwareSection() {
                                     <div className="w-full h-full bg-gradient-to-br from-slate-900 to-emerald-950/30 flex flex-col items-center justify-center">
                                         <Tablet size={64} className="text-emerald-500/50 mb-4" />
                                         <div className="text-emerald-200/50 font-mono text-sm uppercase tracking-widest">Nuvanacore OS</div>
-                                        <div className="text-blue-200/50 font-mono text-xs mt-1">Status: Core Sync Enabled</div>
+                                        <div className="text-blue-200/50 font-mono text-xs mt-1">Status: Connected Nuvanet</div>
                                     </div>
                                     {/* Glare */}
                                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />

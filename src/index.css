@@ -384,35 +384,27 @@
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     overscroll-behavior-y: contain;
-    /* Prevents outer page bouncing */
-
-    /* Hardware acceleration for snapping */
     will-change: transform, scroll-position;
 
-    /* Hide scrollbar for Chrome, Safari and Opera */
     &::-webkit-scrollbar {
       display: none;
     }
 
-    /* Hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none;
-    /* IE and Edge */
     scrollbar-width: none;
-    /* Firefox */
   }
 
-  /* Target all direct children components that are meant to be full sections */
   main>section,
-  main>div[class*="section"],
   main>div[id],
   .snap-start {
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    height: 100vh;
     min-height: 100vh;
     width: 100%;
     flex-shrink: 0;
     position: relative;
-    /* Ensure stable coordinate system */
+    overflow: hidden;
   }
 
   /* Footer specifically snaps to the bottom without taking full height */
