@@ -40,12 +40,13 @@ export function ClassroomOSSection() {
                     <div className="inline-block px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-6">
                         OS Layer
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white text-center">
                         Nuvana360 Classroom OS
                     </h2>
-                    <div className="text-l text-muted-foreground max-w-2xl mx-auto flex flex-col items-center gap-2">
-                        <p>The central nervous system of your school. One platform tailored for:</p>
-                        <div className="flex gap-4 md:gap-8 justify-center mt-2">
+                    <div className="text-center text-xl text-muted-foreground max-w-2xl mx-auto flex flex-col items-center gap-1">
+                        <p>The central nervous system of your school.</p>
+                        <p>One platform tailored for:</p>
+                        <div className="flex gap-4 md:gap-8 justify-center mt-4">
                             <span className="flex items-center"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-2" /> Students</span>
                             <span className="flex items-center"><span className="w-1.5 h-1.5 rounded-full bg-blue-400 mr-2" /> Teachers</span>
                             <span className="flex items-center"><span className="w-1.5 h-1.5 rounded-full bg-purple-400 mr-2" /> Admins</span>

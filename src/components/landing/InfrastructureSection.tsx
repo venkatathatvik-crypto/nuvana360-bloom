@@ -32,10 +32,12 @@ export function InfrastructureSection() {
                                 </div>
                             </div>
 
-                            {/* Satellite nodes */}
-                            {[0, 90, 180, 270].map((deg, i) => (
-                                <div key={i} className="absolute top-1/2 left-1/2 w-4 h-4 bg-blue-400 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.8)]"
-                                    style={{ transform: `rotate(${deg}deg) translate(150px) rotate(-${deg}deg)` }} />
+                            {/* Satellite nodes at 12, 3, 6, 9 o'clock */}
+                            {[270, 0, 90, 180].map((deg, i) => (
+                                <div key={i} className="absolute top-1/2 left-1/2 w-3 h-3 bg-blue-400 rounded-full shadow-[0_0_15px_rgba(59,130,246,1)] animate-pulse z-20"
+                                    style={{
+                                        transform: `translate(-50%, -50%) rotate(${deg}deg) translate(210px) rotate(-${deg}deg)`
+                                    }} />
                             ))}
                         </div>
                     </motion.div>

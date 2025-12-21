@@ -22,8 +22,8 @@ export function HeroSection() {
       <EducationalScene />
 
       {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/50 to-background z-10" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_hsl(var(--background))_70%)] z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/20 to-background z-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_hsl(var(--background))_85%)] z-10" />
 
       {/* Background Doodles */}
       <PremiumDoodles />

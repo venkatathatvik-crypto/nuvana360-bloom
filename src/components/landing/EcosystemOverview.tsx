@@ -26,7 +26,7 @@ export const EcosystemOverview: React.FC = () => {
   useEffect(() => {
     // Minimal, ultra-short ambient tap
     clickAudioRef.current = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
-    clickAudioRef.current.volume = 0.05; // Dropped volume to 5% for extreme minimalism
+    clickAudioRef.current.volume = 0.25; // Balanced for clarity
   }, []);
 
   const playClick = () => {

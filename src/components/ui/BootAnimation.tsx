@@ -1,6 +1,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
+import { Button } from "@/components/ui/button";
 
 interface BootAnimationProps {
     onComplete?: () => void;
@@ -52,14 +53,29 @@ const SchematicBackground = () => (
 
 export function BootAnimation({ onComplete }: BootAnimationProps) {
     const [isExiting, setIsExiting] = useState(false);
+    const bootAudioRef = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
-        // Sequence: ~2s build up + ~2s hold time = 4s total
+        // Initialize and play futuristic boot audio immediately
+        bootAudioRef.current = new Audio('/boot-sound.mp3');
+        bootAudioRef.current.volume = 0.6;
+        bootAudioRef.current.play().catch(() => {
+            console.log("Autoplay blocked by browser. Audio will play after user's first interaction elsewhere.");
+        });
+
+        // Sequence: 6 seconds total
         const timer = setTimeout(() => {
             setIsExiting(true);
-        }, 4000);
+            if (bootAudioRef.current) {
+                bootAudioRef.current.pause();
+                bootAudioRef.current = null;
+            }
+        }, 6000);
 
-        return () => clearTimeout(timer);
+        return () => {
+            clearTimeout(timer);
+            bootAudioRef.current?.pause();
+        };
     }, []);
 
     return (
@@ -67,7 +83,7 @@ export function BootAnimation({ onComplete }: BootAnimationProps) {
             {!isExiting && (
                 <motion.div
                     key="boot-container"
-                    className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#020817]" // Nuvana Navy
+                    className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#020817]"
                     exit={{ opacity: 0, scale: 1.05, filter: "blur(20px)" }}
                     transition={{ duration: 0.8, ease: "easeInOut" }}
                 >
@@ -135,7 +151,7 @@ export function BootAnimation({ onComplete }: BootAnimationProps) {
                             className="h-full bg-[#00FF84]"
                             initial={{ width: "0%" }}
                             animate={{ width: "100%" }}
-                            transition={{ duration: 1.8, ease: "easeInOut" }}
+                            transition={{ duration: 5.5, ease: "easeInOut" }}
                         />
                     </motion.div>
 

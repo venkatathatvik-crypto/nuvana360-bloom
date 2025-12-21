@@ -113,7 +113,19 @@ export const FAQ = () => {
             />
           </div>
 
-          <Card className="bg-slate-900/60 backdrop-blur-xl border-primary/20 shadow-xl overflow-hidden max-h-[60vh] flex flex-col">
+          <style dangerouslySetInnerHTML={{
+            __html: `
+            @keyframes border-pulse {
+              0% { border-color: rgba(59, 130, 246, 0.2); box-shadow: 0 0 5px rgba(59, 130, 246, 0.1); }
+              50% { border-color: rgba(59, 130, 246, 1); box-shadow: 0 0 25px rgba(59, 130, 246, 0.6); }
+              100% { border-color: rgba(59, 130, 246, 0.2); box-shadow: 0 0 5px rgba(59, 130, 246, 0.1); }
+            }
+            .animate-border-blink {
+              animation: border-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+          `}} />
+
+          <Card className="bg-slate-900/60 backdrop-blur-xl border-2 border-blue-500/20 animate-border-blink overflow-hidden max-h-[60vh] flex flex-col relative z-20">
             <div
               ref={scrollRef}
               onScroll={handleInternalScroll}
