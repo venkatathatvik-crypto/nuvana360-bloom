@@ -1,8 +1,8 @@
 export function Footer() {
   return (
-    <footer className="relative py-4 border-t border-border/30 bg-background/50 backdrop-blur-md">
+    <footer className="relative py-2 md:py-4 border-t border-border/30 bg-background/50 backdrop-blur-md">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
           {/* Logo */}
           <div className="flex items-center gap-2">
             <span className="text-xl font-['Montserrat'] flex items-baseline tracking-tight">
