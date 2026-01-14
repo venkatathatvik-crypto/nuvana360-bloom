@@ -59,13 +59,13 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="min-h-0 md:min-h-screen flex items-center relative py-4 md:py-24 bg-[#020617] snap-start">
+    <section id="contact" className="min-h-0 md:min-h-screen flex items-center relative py-2 md:py-24 bg-[#020617] snap-start">
       <div className="absolute inset-0 pointer-events-none">
         <PremiumDoodles />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
-        <div className="max-w-2xl mx-auto text-center mb-8 md:mb-12">
+        <div className="max-w-2xl mx-auto text-center mb-4 md:mb-12">
           <h2 className="text-lg md:text-5xl font-bold text-white mb-2 md:mb-4">Get In Touch</h2>
           <p className="text-xs md:text-base text-slate-400">Ready to transform your school? Let's talk.</p>
         </div>

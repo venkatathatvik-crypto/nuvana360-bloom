@@ -44,14 +44,14 @@ export const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="min-h-0 md:min-h-screen flex items-center relative py-4 md:py-24 bg-slate-950 snap-start">
+    <section id="faq" className="min-h-0 md:min-h-screen flex items-center relative py-2 md:py-24 bg-slate-950 snap-start">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#020617_80%)]" />
         <PremiumDoodles />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
+        <div className="max-w-3xl mx-auto text-center mb-4 md:mb-12">
           <h2 className="text-lg md:text-5xl font-bold text-white mb-2 md:mb-4">Common Questions</h2>
           <p className="text-xs md:text-base text-slate-400">Everything you need to know about NuvanaCore.</p>
         </div>
