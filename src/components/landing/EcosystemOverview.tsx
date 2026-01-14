@@ -72,8 +72,8 @@ export const EcosystemOverview: React.FC = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        delay: i * 0.1,
-        duration: 0.8,
+        delay: i * 0.2, // Increased delay for better step-by-step effect on mobile
+        duration: 1, // Longer duration for smoother animation
         ease: [0.22, 1, 0.36, 1]
       }
     })
@@ -139,7 +139,7 @@ export const EcosystemOverview: React.FC = () => {
               variants={levelVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "-50px", amount: 0.3 }}
               className={`relative ${item.width} group scroll-mt-32`}
             >
               <div className={`

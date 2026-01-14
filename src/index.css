@@ -401,6 +401,17 @@
     min-height: 100vh;
     scroll-snap-align: none;
   }
+
+  /* Smoother animations on mobile */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  [class*="motion"] {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
 }
 
 /* Desktop One-Scroll Snapping */
