@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="relative py-6 border-t border-border/30 bg-background/50 backdrop-blur-md">
+    <footer className="relative py-4 border-t border-border/30 bg-background/50 backdrop-blur-md">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Logo */}

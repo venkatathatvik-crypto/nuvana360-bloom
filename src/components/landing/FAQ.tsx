@@ -1,66 +1,36 @@
+
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { PremiumDoodles } from "@/components/ui/PremiumDoodles";
 
 export type FaqItem = { question: string; answer: string };
 
 export const faqItems: FaqItem[] = [
   {
-    question: "What is Nuvana360 Bloom?",
-    answer:
-      "Nuvana360 Bloom is a modern, interactive learning platform  assistant that helps schools and teams engage with our application.",
+    question: "What is NuvanaCore?",
+    answer: "NuvanaCore is a unified digital learning ecosystem built specifically for schools, combining Hardware, OS, AI, and connectivity."
   },
   {
     question: "Do we need to procure hardware separately?",
-    answer:
-      "No. We provide an end-to-end solution covering hardware, software, and connectivity under a single vendor model.",
+    answer: "No. We provide an end-to-end solution covering hardware, software, and connectivity under a single vendor model."
   },
   {
     question: "Who manages the internet infrastructure?",
-    answer:
-      "We manage connectivity as part of the solution, including monitoring uptime and usage.",
+    answer: "We manage connectivity as part of the solution, ensuring zero school infrastructure is needed."
   },
   {
-    question: "Is the pilot paid or free??",
-    answer:
-      "Pilots are paid to ensure seriousness, support quality, and measurable outcomes.",
+    question: "How is pricing structured?",
+    answer: "Pricing is based on number of students, hardware units, and subscription period."
   },
   {
-    question: " How is pricing structured?",
-    answer:
-      "Pricing is based on number of students, hardware units, and subscription period, with clear year-wise visibility.",
-  },
-  {
-    question: "What happens if the company stops operations in the future?",
-    answer:
-      " Schools retain access to deployed systems as per contract terms, and data remains retrievable.",
-  },
-  {
-    question: "How do we know this is not an early-stage experiment?",
-    answer:
-      "The solution is already being piloted with multiple institutions, and infrastructure partners are contracted long-term.",
-  },
-  {
-    question: "What kind of support do you provide?",
-    answer:
-      "Dedicated Support Lines based on rollout volume, critical support will be resolved within 24 hours, Non critical support within 48 hours.",
-  },
-  {
-    question: "Can we customize branding and access levels?",
-    answer:
-      "Yes. Schools can have custom branding, admin controls, and role-based access."
-  },
-  {
-    question: "How long does it take to deploy the solution in a school?",
-    answer:
-      "post hardware procurement, deployment takes 2-3 days, this includes system setup, admin access creation, student onboarding and both student and teacher training."
-  },
+    question: "How long does it take to deploy?",
+    answer: "Post procurement, deployment takes 2-3 days, including system setup and full training."
+  }
 ];
-
-import { PremiumDoodles } from "@/components/ui/PremiumDoodles";
 
 export const FAQ = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -69,120 +39,37 @@ export const FAQ = () => {
   const handleInternalScroll = () => {
     if (scrollRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
-      const progress = scrollTop / (scrollHeight - clientHeight);
-      setScrollProgress(progress);
-    }
-  };
-
-  const scrollFAQUp = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ top: -200, behavior: 'smooth' });
-    }
-  };
-
-  const scrollFAQDown = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ top: 200, behavior: 'smooth' });
+      setScrollProgress(scrollTop / (scrollHeight - clientHeight));
     }
   };
 
   return (
-    <section id="faq" className="h-screen flex items-center relative py-12 bg-gradient-to-b from-slate-950 via-[#020817] to-slate-950 overflow-hidden snap-start">
-      {/* Seamless Transition Blender (Top) */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
-
-      {/* Space Background & Green Dots */}
+    <section id="faq" className="min-h-screen flex items-center relative py-8 md:py-24 bg-slate-950 snap-start">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-900/10 via-slate-950/50 to-slate-950" />
-        {/* Custom Green Stars */}
-        {Array.from({ length: 30 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-emerald-500/30 blur-[1px] animate-pulse"
-            style={{
-              width: Math.random() * 3 + 1 + 'px',
-              height: Math.random() * 3 + 1 + 'px',
-              top: Math.random() * 100 + '%',
-              left: Math.random() * 100 + '%',
-              animationDelay: Math.random() * 5 + 's',
-              animationDuration: Math.random() * 3 + 2 + 's'
-            }}
-          />
-        ))}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#020617_80%)]" />
         <PremiumDoodles />
       </div>
 
-      <div className="container relative z-10">
-        <div className="mx-auto max-w-3xl text-center mb-6">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">Frequently Asked Questions</h2>
-          <p className="text-lg text-emerald-100/60">Quick answers about Nuvana's features and onboarding.</p>
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
+          <h2 className="text-lg md:text-5xl font-bold text-white mb-2 md:mb-4">Common Questions</h2>
+          <p className="text-xs md:text-base text-slate-400">Everything you need to know about NuvanaCore.</p>
         </div>
 
-        <div className="mx-auto max-w-3xl relative">
-          {/* Internal Progress Line with Scroll Buttons */}
-          <div className="absolute -left-4 md:-left-8 top-0 bottom-0 w-[2px] bg-white/5 rounded-full overflow-hidden">
-            <motion.div
-              className="w-full bg-primary origin-top"
-              style={{ scaleY: scrollProgress, height: '100%' }}
-            />
-          </div>
-
-          {/* Scroll Up Button */}
-          <div className="absolute -left-8 md:-left-12 top-0">
-            <Button
-              size="icon"
-              variant="ghost"
-              onClick={scrollFAQUp}
-              className="w-7 h-7 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-300 backdrop-blur-sm transition-all"
-              title="Scroll FAQ Up"
-            >
-              <ChevronUp className="h-4 w-4" />
-            </Button>
-          </div>
-
-          {/* Scroll Down Button */}
-          <div className="absolute -left-7 md:-left-11 bottom-0">
-            <Button
-              size="icon"
-              variant="ghost"
-              onClick={scrollFAQDown}
-              className="w-7 h-7 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-300 backdrop-blur-sm transition-all"
-              title="Scroll FAQ Down"
-            >
-              <ChevronDown className="h-4 w-4" />
-            </Button>
-          </div>
-
-          <style dangerouslySetInnerHTML={{
-            __html: `
-            @keyframes border-pulse {
-              0% { border-color: rgba(59, 130, 246, 0.2); box-shadow: 0 0 5px rgba(59, 130, 246, 0.1); }
-              50% { border-color: rgba(59, 130, 246, 1); box-shadow: 0 0 25px rgba(59, 130, 246, 0.6); }
-              100% { border-color: rgba(59, 130, 246, 0.2); box-shadow: 0 0 5px rgba(59, 130, 246, 0.1); }
-            }
-            .animate-border-blink {
-              animation: border-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-            }
-          `}} />
-
-          <Card className="bg-slate-900/60 backdrop-blur-xl border-2 border-blue-500/20 animate-border-blink overflow-hidden max-h-[60vh] flex flex-col relative z-20">
+        <div className="max-w-3xl mx-auto relative">
+          <Card className="bg-slate-900/40 backdrop-blur-md border border-white/10 overflow-hidden max-h-[50vh] flex flex-col">
             <div
               ref={scrollRef}
               onScroll={handleInternalScroll}
-              className="overflow-y-auto flex-1 p-2 md:p-4 scrollbar-none"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              className="overflow-y-auto p-4 md:p-8 premium-scrollbar"
             >
-              <style dangerouslySetInnerHTML={{
-                __html: `
-                .scrollbar-none::-webkit-scrollbar { display: none; }
-              `}} />
               <Accordion type="single" collapsible className="w-full">
                 {faqItems.map((item, idx) => (
-                  <AccordionItem key={idx} value={`item-${idx}`} className="border-primary/10 px-6">
-                    <AccordionTrigger className="text-white hover:text-primary transition-colors text-left py-4 font-bold md:text-xl">
+                  <AccordionItem key={idx} value={`item-${idx}`} className="border-white/5">
+                    <AccordionTrigger className="text-white hover:text-primary py-3 md:py-4 text-left text-sm md:text-base font-semibold">
                       {item.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-slate-200 pb-4 leading-relaxed">
+                    <AccordionContent className="text-slate-400 pb-3 md:pb-4 text-xs md:text-base leading-relaxed">
                       {item.answer}
                     </AccordionContent>
                   </AccordionItem>
@@ -192,9 +79,6 @@ export const FAQ = () => {
           </Card>
         </div>
       </div>
-
-      {/* Bottom Blender */}
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-slate-950 to-transparent z-10 pointer-events-none" />
     </section>
   );
 };

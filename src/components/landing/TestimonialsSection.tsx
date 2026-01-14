@@ -7,7 +7,7 @@ const testimonials = [
     name: 'Student Name',
     role: 'High School Senior',
     avatar: '👩‍🎓',
-    content: 'Your testimonial here. Share how Nuvana360 transformed the learning experience.',
+    content: 'Your testimonial here. Share how NuvanaCore transformed the learning experience.',
     rating: 5
   },
   {
@@ -35,12 +35,11 @@ const testimonials = [
 
 function TestimonialCard({ testimonial, isActive }: { testimonial: typeof testimonials[0]; isActive: boolean }) {
   return (
-    <div className={`relative p-8 rounded-2xl glass gradient-border transition-all duration-500 ${
-      isActive ? 'scale-100 opacity-100' : 'scale-95 opacity-50'
-    }`}>
+    <div className={`relative p-6 md:p-8 rounded-2xl glass gradient-border transition-all duration-500 ${isActive ? 'scale-100 opacity-100' : 'scale-95 opacity-50'
+      }`}>
       {/* Quote icon */}
       <Quote className="absolute top-6 right-6 w-10 h-10 text-primary/20" />
-      
+
       {/* Rating */}
       <div className="flex gap-1 mb-4">
         {Array.from({ length: testimonial.rating }).map((_, i) => (
@@ -125,9 +124,8 @@ export function TestimonialsSection() {
 
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
           <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary mb-6">
             Testimonials
           </span>
@@ -135,24 +133,23 @@ export function TestimonialsSection() {
             Loved by <span className="gradient-text">Educators & Students</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            See what our community has to say about their experience with Nuvana360.
+            See what our community has to say about their experience with NuvanaCore.
           </p>
         </div>
 
         {/* Carousel */}
-        <div className={`relative max-w-4xl mx-auto transition-all duration-1000 delay-300 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+        <div className={`relative max-w-4xl mx-auto transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
           {/* Cards container */}
           <div className="relative overflow-hidden">
-            <div 
+            <div
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="w-full flex-shrink-0 px-4">
-                  <TestimonialCard 
-                    testimonial={testimonial} 
+                  <TestimonialCard
+                    testimonial={testimonial}
                     isActive={index === currentIndex}
                   />
                 </div>
@@ -177,11 +174,10 @@ export function TestimonialsSection() {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    index === currentIndex
-                      ? 'bg-primary w-8'
-                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                  }`}
+                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentIndex
+                    ? 'bg-primary w-8'
+                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                    }`}
                 />
               ))}
             </div>

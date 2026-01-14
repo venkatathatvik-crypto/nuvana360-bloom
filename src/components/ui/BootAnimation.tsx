@@ -52,19 +52,20 @@ const SchematicBackground = () => (
 );
 
 export function BootAnimation({ onComplete }: BootAnimationProps) {
+    const [currentStep, setCurrentStep] = useState(0); // 0: Logo, 1: Tagline
     const [isExiting, setIsExiting] = useState(false);
     const bootAudioRef = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
-        // Initialize and play futuristic boot audio immediately
-        bootAudioRef.current = new Audio('/boot-sound.mp3');
-        bootAudioRef.current.volume = 0.6;
-        bootAudioRef.current.play().catch(() => {
-            console.log("Autoplay blocked by browser. Audio will play after user's first interaction elsewhere.");
-        });
+        // Step 1: Show Logo (starts at 0s)
 
-        // Sequence: 6 seconds total
-        const timer = setTimeout(() => {
+        // Step 2: Show Tagline (starts at 2s)
+        const taglineTimer = setTimeout(() => {
+            setCurrentStep(1);
+        }, 2000);
+
+        // Step 3: Start Exit (starts at 6s)
+        const exitTimer = setTimeout(() => {
             setIsExiting(true);
             if (bootAudioRef.current) {
                 bootAudioRef.current.pause();
@@ -72,8 +73,16 @@ export function BootAnimation({ onComplete }: BootAnimationProps) {
             }
         }, 6000);
 
+        // Initialize and play futuristic boot audio immediately
+        bootAudioRef.current = new Audio('/boot-sound.mp3');
+        bootAudioRef.current.volume = 0.1;
+        bootAudioRef.current.play().catch(() => {
+            console.log("Autoplay blocked by browser. Audio will play after user's first interaction elsewhere.");
+        });
+
         return () => {
-            clearTimeout(timer);
+            clearTimeout(taglineTimer);
+            clearTimeout(exitTimer);
             bootAudioRef.current?.pause();
         };
     }, []);
@@ -98,46 +107,51 @@ export function BootAnimation({ onComplete }: BootAnimationProps) {
                     />
 
                     {/* Content Container */}
-                    <div className="relative z-20 flex items-baseline tracking-tighter">
+                    <div className="relative z-20 w-full max-w-4xl flex flex-col items-center justify-center">
+                        <AnimatePresence mode="wait">
+                            {!currentStep ? (
+                                <motion.div
+                                    key="logo-step"
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+                                    transition={{ duration: 0.8, ease: "circOut" }}
+                                    className="flex items-baseline tracking-tighter"
+                                >
+                                    {/* The "N" */}
+                                    <motion.h1
+                                        className="text-5xl md:text-8xl font-black leading-none select-none font-['Montserrat']"
+                                        style={{ color: "#00FF84" }}
+                                    >
+                                        N
+                                    </motion.h1>
 
-                        {/* The "N" - Reverted to Standard Bold Text */}
-                        <motion.div
-                            initial={{ scale: 3, opacity: 0, filter: "blur(30px)" }}
-                            animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-                            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-                            className="relative"
-                        >
-                            <h1
-                                className="text-5xl md:text-7xl font-black leading-none select-none font-['Montserrat']"
-                                style={{
-                                    color: "#00FF84"
-                                }}
-                            >
-                                N
-                            </h1>
-                            {/* Internal shine effect */}
-                            <motion.div
-                                className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 mix-blend-overlay"
-                                animate={{ opacity: [0, 1, 0], x: ["-100%", "100%"] }}
-                                transition={{ duration: 1.2, delay: 0.5, ease: "easeInOut" }}
-                            />
-                        </motion.div>
-
-                        {/* "uvanaCore" text slide-out */}
-                        <motion.div
-                            initial={{ width: 0, opacity: 0, x: -20 }}
-                            animate={{ width: "auto", opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8, delay: 0.8, ease: "circOut" }}
-                            className="overflow-hidden whitespace-nowrap"
-                        >
-                            <div className="flex ml-1">
-                                <div className="text-5xl md:text-7xl text-white tracking-widest font-['Montserrat'] flex items-center">
-                                    <span className="font-bold">uvana</span>
-                                    <span className="font-thin">core</span>
-                                </div>
-
-                            </div>
-                        </motion.div>
+                                    {/* "uvanaCore" */}
+                                    <div className="text-5xl md:text-8xl text-white font-['Montserrat'] flex items-center ml-1">
+                                        <span className="font-bold">uvana</span>
+                                        <span className="font-thin">Core</span>
+                                    </div>
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="tagline-step"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 1, ease: "circOut" }}
+                                    className="text-center px-4"
+                                >
+                                    <div className="flex flex-col items-center text-center uppercase font-['Montserrat'] font-black">
+                                        <p className="text-lg md:text-2xl text-white tracking-[0.4em] mb-1">
+                                            <span className="text-[#FF9933]">INDIA</span>'S FIRST
+                                        </p>
+                                        <p className="text-[10px] md:text-base text-white/90 tracking-[0.2em] whitespace-nowrap">
+                                            DIGITAL COGNITIVE LEARNING PLATFORM
+                                        </p>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
 
                     {/* Bottom Loading Bar - Authentic System Boot Feel */}

@@ -17,7 +17,7 @@ export function HeroSection() {
   };
 
   return (
-    <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden snap-start">
+    <section id="hero" ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden snap-start">
       {/* 3D Background Scene */}
       <EducationalScene />
 
@@ -36,18 +36,31 @@ export function HeroSection() {
             <span className="relative flex h-2 w-2">
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            <span className="text-sm font-medium text-muted-foreground">End-to-End Digital Solution</span>
+            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+              <span className="md:hidden">End-to-End Solution</span>
+              <span className="hidden md:inline">End-to-End Digital Solution</span>
+            </span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 px-4">
-            <span className="text-primary font-black">N</span><span className="text-white font-black">uvana</span><span className="text-white font-thin">core</span>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-2 md:mb-4 px-4">
+            <span className="text-primary font-black">N</span><span className="text-white font-black">uvana</span><span className="text-white font-thin">Core</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl lg:text-2xl text-foreground/90 font-light max-w-[30ch] md:max-w-2xl leading-relaxed mb-10 px-4">
-            Built to work together, not stitched together. <br className="hidden md:block" />
-            <span className="text-primary font-normal">Hardware + OS + AI + Internet</span>
+            {/* Mobile Layout */}
+            <span className="md:hidden flex flex-col gap-0 leading-tight">
+              <span>Built to work together,</span>
+              <span>not stitched together.</span>
+              <span className="text-primary font-normal text-sm whitespace-nowrap mt-1">Hardware + OS + AI + Internet</span>
+            </span>
+
+            {/* Desktop Layout */}
+            <span className="hidden md:inline">
+              Built to work together, not stitched together. <br />
+              <span className="text-primary font-normal">Hardware + OS + AI + Internet</span>
+            </span>
           </p>
 
           {/* CTA Buttons */}
@@ -55,11 +68,11 @@ export function HeroSection() {
             <Button
               size="lg"
               onClick={scrollToEcosystem}
-              className="group relative px-8 py-6 text-lg font-semibold transition-all duration-300"
+              className="group relative px-6 py-4 text-sm md:px-8 md:py-6 md:text-lg font-semibold transition-all duration-300"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Explore Ecosystem
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </Button>
           </div>

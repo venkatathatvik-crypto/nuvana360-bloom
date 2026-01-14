@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,143 +14,65 @@ export const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
-
-  const validate = () => {
-    const next: { name?: string; email?: string; message?: string } = {};
-    if (!name.trim()) next.name = "Please enter your name.";
-    if (!email.trim()) next.email = "Please enter your email.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next.email = "Please enter a valid email.";
-    if (!message.trim() || message.trim().length < 10) next.message = "Please include at least 10 characters.";
-    setErrors(next);
-    return Object.keys(next).length === 0;
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (!name || !email || !message) return;
     setLoading(true);
 
     try {
-      // Using Web3Forms for reliable email delivery without a custom backend
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "075c3f3f-2b50-482f-8700-6532881b4d08",
-          name: name,
-          email: email,
-          message: message,
-          subject: `New Bloom Landing Page Contact: ${name}`,
-          from_name: "Bloom Website Contact",
-          // The email recipient should be configured in Web3Forms dashboard for this key
+          access_key: "075c3f3f-2b50-482f-8700-6532881b4d08",
+          name, email, message,
+          subject: `Nuvana Contact: ${name}`
         }),
       });
 
-      const result = await response.json();
-      if (result.success) {
-        toast({
-          title: "Message sent",
-          description: "Thanks for reaching out! The Nuvanacore team will get back to you soon.",
-        });
-        setName("");
-        setEmail("");
-        setMessage("");
-      } else {
-        toast({
-          title: "Submission Error",
-          description: result.message || "Something went wrong. Please try again.",
-          variant: "destructive",
-        });
+      if (response.ok) {
+        toast({ title: "Message sent", description: "The Nuvanacore team will get back to you soon." });
+        setName(""); setEmail(""); setMessage("");
       }
-    } catch (error) {
-      toast({
-        title: "Connection Error",
-        description: "Failed to reach the server. Please check your internet connection.",
-        variant: "destructive",
-      });
+    } catch {
+      toast({ title: "Error", description: "Failed to send message.", variant: "destructive" });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section id="contact" className="h-screen flex items-center relative py-12 bg-gradient-to-b from-slate-950 to-[#020617] overflow-hidden snap-start">
-      {/* Top Transition Blender */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-slate-950 to-transparent z-10 pointer-events-none" />
-
-      {/* Space Background & Green Dots */}
+    <section id="contact" className="min-h-screen flex items-center relative py-8 md:py-24 bg-[#020617] snap-start">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-900/05 via-slate-950/40 to-slate-950" />
-        {/* Custom Green Stars */}
-        {Array.from({ length: 40 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-emerald-500/20 blur-[1px] animate-pulse"
-            style={{
-              width: Math.random() * 3 + 1 + 'px',
-              height: Math.random() * 3 + 1 + 'px',
-              top: Math.random() * 100 + '%',
-              left: Math.random() * 100 + '%',
-              animationDelay: Math.random() * 5 + 's',
-              animationDuration: Math.random() * 3 + 2 + 's'
-            }}
-          />
-        ))}
         <PremiumDoodles />
       </div>
 
-      <div className="container relative z-10">
-        <div className="mx-auto max-w-3xl text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">Contact Us</h2>
-          <p className="text-lg text-primary/70">Have questions? Send us a message and we'll help you get started.</p>
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="max-w-2xl mx-auto text-center mb-8 md:mb-12">
+          <h2 className="text-lg md:text-5xl font-bold text-white mb-2 md:mb-4">Get In Touch</h2>
+          <p className="text-xs md:text-base text-slate-400">Ready to transform your school? Let's talk.</p>
         </div>
-        <Card className="mx-auto max-w-3xl bg-slate-900/60 backdrop-blur-xl border-primary/20 shadow-2xl shadow-primary/10 p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-primary/90">Name</Label>
-                <Input
-                  id="name"
-                  placeholder="Your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="bg-slate-950/50 border-primary/20 text-white placeholder:text-primary/30 focus-visible:ring-primary/50"
-                />
-                {errors.name && <p className="text-red-400 text-sm">{errors.name}</p>}
+
+        <Card className="max-w-2xl mx-auto bg-slate-900/40 backdrop-blur-md border border-white/10 p-4 md:p-8">
+          <form onSubmit={handleSubmit} className="space-y-3 md:space-y-6">
+            <div className="grid md:grid-cols-2 gap-3 md:gap-6">
+              <div className="space-y-1.5 md:space-y-2">
+                <Label htmlFor="name" className="text-white/70 text-xs md:text-sm">Name</Label>
+                <Input id="name" value={name} onChange={e => setName(e.target.value)} className="bg-slate-950/50 border-white/10 text-white h-8 md:h-10 text-xs md:text-base" />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-primary/90">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-slate-950/50 border-primary/20 text-white placeholder:text-primary/30 focus-visible:ring-primary/50"
-                />
-                {errors.email && <p className="text-red-400 text-sm">{errors.email}</p>}
+              <div className="space-y-1.5 md:space-y-2">
+                <Label htmlFor="email" className="text-white/70 text-xs md:text-sm">Email</Label>
+                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-slate-950/50 border-white/10 text-white h-8 md:h-10 text-xs md:text-base" />
               </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="message" className="text-primary/90">Message</Label>
-              <Textarea
-                id="message"
-                placeholder="Tell us about your goals, timelines, or any questions you have."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="min-h-[140px] bg-slate-950/50 border-primary/20 text-white placeholder:text-primary/30 focus-visible:ring-primary/50"
-              />
-              {errors.message && <p className="text-red-400 text-sm">{errors.message}</p>}
+            <div className="space-y-1.5 md:space-y-2">
+              <Label htmlFor="message" className="text-white/70 text-xs md:text-sm">Message</Label>
+              <Textarea id="message" value={message} onChange={e => setMessage(e.target.value)} className="min-h-[80px] md:min-h-[120px] bg-slate-950/50 border-white/10 text-white text-xs md:text-base" />
             </div>
-            <div className="flex items-center justify-end gap-3">
-              <Button type="submit" disabled={loading} className="bg-primary text-primary-foreground hover:bg-primary/90 border border-primary/20">
-                {loading ? "Sending..." : "Send Message"}
-              </Button>
-            </div>
+            <Button type="submit" disabled={loading} className="w-full bg-primary text-primary-foreground font-bold h-8 md:h-10 text-xs md:text-base">
+              {loading ? "Sending..." : "Send Message"}
+            </Button>
           </form>
         </Card>
       </div>

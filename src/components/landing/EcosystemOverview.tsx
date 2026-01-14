@@ -1,288 +1,231 @@
 
-import React, { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
+import React from 'react';
+import { motion, Variants } from 'framer-motion';
 import {
   Tablet,       // Corebook
   LayoutGrid,   // OS
-  Brain,        // AI (Dual Intelligence)
+  Brain,        // AI
   Wifi,         // NuvanaNet
-  Radio,        // Core Icon
-  ChevronRight,
-  ChevronLeft
+  Shield,
+  CheckCircle2,
+  PenTool
 } from 'lucide-react';
 import { PremiumDoodles } from '@/components/ui/PremiumDoodles';
-import { Button } from '@/components/ui/button';
+
+const pyramidLevels = [
+  {
+    level: 1,
+    id: "corebook",
+    icons: [Tablet],
+    title: "Nuvana Corebook",
+    description: "Institution-branded tablets in\u00A0a\u00A0locked environment.",
+    features: ["Octa-Core Power", "Firmware Locked", "6000mAh Battery"],
+    color: "from-blue-500/20 to-blue-600/5",
+    accent: "text-blue-400",
+    border: "border-blue-500/30",
+    width: "w-[72%] sm:w-[55%] md:w-[48%] lg:w-[42%]"
+  },
+  {
+    level: 2,
+    id: "os",
+    icons: [LayoutGrid],
+    title: "Nuvana 360",
+    description: "Central nervous system linking\u00A0all users in\u00A0one unified dashboard.",
+    features: ["Live Monitoring", "Instant Sync", "Data Privacy"],
+    color: "from-emerald-500/20 to-emerald-600/5",
+    accent: "text-emerald-400",
+    border: "border-emerald-500/30",
+    width: "w-[81%] sm:w-[60%] md:w-[55%] lg:w-[48%]"
+  },
+  {
+    level: 3,
+    id: "ai",
+    icons: [Brain, PenTool],
+    iconColors: ["text-blue-400", "text-emerald-400"],
+    title: "Dual Intelligence",
+    description: "Specialized AI: Archer for\u00A0students & Drona for\u00A0teachers.",
+    features: ["Personalized Path", "Auto-grading", "Deep Insights"],
+    color: "from-teal-500/20 to-teal-600/5",
+    accent: "text-teal-400",
+    border: "border-teal-500/30",
+    width: "w-[90%] sm:w-[70%] md:w-[65%] lg:w-[59%]"
+  },
+  {
+    level: 4,
+    id: "infrastructure",
+    icons: [Wifi],
+    title: "Nuvanet Infrastructure",
+    description: "Managed internet delivering\u00A0high-speed connectivity with\u00A0zero IT overhead.",
+    features: ["Instant Deployment", "Zero IT Overhead", "Authorized Access "],
+    color: "from-indigo-500/20 to-indigo-600/5",
+    accent: "text-indigo-400",
+    border: "border-indigo-500/30",
+    width: "w-[99%] sm:w-[85%] md:w-[80%] lg:w-[72%]"
+  }
+];
 
 export const EcosystemOverview: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const widget9Ref = useRef<HTMLDivElement>(null);  // Left
-  const widget12Ref = useRef<HTMLDivElement>(null); // Top
-  const widget3Ref = useRef<HTMLDivElement>(null);  // Right
-  const widget6Ref = useRef<HTMLDivElement>(null);  // Bottom
-  const [currentStep, setCurrentStep] = useState(0);
-  const tl = useRef<gsap.core.Timeline | null>(null);
-  const totalSteps = 4;
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Responsive Radius calculation
-      const isMobile = window.innerWidth < 768;
-      const radius = isMobile ? 140 : 260; // Increased mobile radius to 140px to avoid overlap with core
-
-      // Initial Setup: Widgets at center, hidden, scaled down
-      gsap.set([widget9Ref.current, widget12Ref.current, widget3Ref.current, widget6Ref.current], {
-        x: 0,
-        y: 0,
-        xPercent: -50,
-        yPercent: -50,
-        autoAlpha: 0, // handles opacity + visibility
-        scale: 0.5
-      });
-
-      // Main Timeline (Paused, controlled by state)
-      tl.current = gsap.timeline({ paused: true });
-
-      // --- STAGE 0: Initial State (Core Only) ---
-      tl.current.addLabel("step0");
-
-      // --- STAGE 1: Left Widget ---
-      tl.current.to(widget9Ref.current, {
-        x: -radius,
-        y: 0,
-        autoAlpha: 1,
-        scale: 1,
-        duration: 0.6,
-        ease: "power2.out"
-      }, "+=0.1");
-      tl.current.addLabel("step1");
-
-      // --- STAGE 2: Top Widget ---
-      tl.current.to(widget12Ref.current, {
-        x: 0,
-        y: -radius,
-        autoAlpha: 1,
-        scale: 1,
-        duration: 0.6,
-        ease: "power2.out"
-      }, "+=0.1");
-      tl.current.addLabel("step2");
-
-      // --- STAGE 3: Right Widget ---
-      tl.current.to(widget3Ref.current, {
-        x: radius,
-        y: 0,
-        autoAlpha: 1,
-        scale: 1,
-        duration: 0.6,
-        ease: "power2.out"
-      }, "+=0.1");
-      tl.current.addLabel("step3");
-
-      // --- STAGE 4: Bottom Widget ---
-      tl.current.to(widget6Ref.current, {
-        x: 0,
-        y: radius,
-        autoAlpha: 1,
-        scale: 1,
-        duration: 0.6,
-        ease: "power2.out"
-      }, "+=0.1");
-      tl.current.addLabel("step4");
-
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  // Update animation when step changes
-  useEffect(() => {
-    if (tl.current) {
-      tl.current.tweenTo(`step${currentStep}`, {
+  const levelVariants: Variants = {
+    hidden: { y: 30, opacity: 0, scale: 0.95 },
+    visible: (i: number) => ({
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delay: i * 0.1,
         duration: 0.8,
-        ease: "power3.inOut"
-      });
-    }
-  }, [currentStep]);
-
-  const nextStep = () => {
-    if (currentStep < totalSteps) {
-      setCurrentStep(prev => prev + 1);
-    }
-  };
-
-  const prevStep = () => {
-    if (currentStep > 0) {
-      setCurrentStep(prev => prev - 1);
-    }
-  };
-
-  // Keyboard Navigation Support
-  useEffect(() => {
-    const playClickSound = () => {
-      const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
-      audio.volume = 0.25;
-      audio.play().catch(() => { });
-    };
-
-    const handleEcosystemKeyDown = (e: KeyboardEvent) => {
-      // Only trigger if this section is visible (using a simple scroll check or observer)
-      if (!containerRef.current) return;
-
-      const rect = containerRef.current.getBoundingClientRect();
-      const isVisible = rect.top >= -rect.height / 2 && rect.bottom <= window.innerHeight + rect.height / 2;
-
-      if (!isVisible) return;
-
-      if (e.key === 'ArrowRight') {
-        playClickSound();
-        nextStep();
-      } else if (e.key === 'ArrowLeft') {
-        playClickSound();
-        prevStep();
+        ease: [0.22, 1, 0.36, 1]
       }
-    };
-
-    window.addEventListener('keydown', handleEcosystemKeyDown);
-    return () => window.removeEventListener('keydown', handleEcosystemKeyDown);
-  }, [currentStep]); // Re-bind when currentStep changes to have access to latest state
-
-  // --- PREMIUM UI STYLING ---
-
-  const widgetClass = `
-    absolute left-1/2 top-1/2 z-30 invisible 
-    flex flex-col items-center justify-center text-center w-32 md:w-64 p-3 md:p-5 
-    bg-slate-900/60 backdrop-blur-2xl border border-white/10 rounded-xl md:rounded-2xl 
-    group transition-all duration-300 ease-out 
-    hover:-translate-y-2 hover:border-primary/50
-    hover:bg-slate-800/80
-  `;
-
-  const iconBgClass = `
-    flex items-center justify-center w-10 h-10 md:w-14 md:h-14 mb-2 md:mb-4 
-    bg-gradient-to-b from-slate-800 to-slate-900 
-    border border-white/5 rounded-full 
-    text-blue-400
-    group-hover:scale-110 group-hover:text-blue-300 group-hover:border-blue-500/30 
-    transition-all duration-300
-  `;
-
-  const titleClass = "text-[10px] md:text-base font-bold text-white tracking-wide mb-0.5 md:mb-1 transition-colors group-hover:text-blue-200";
-  const descClass = "text-[8px] md:text-xs font-medium text-slate-400 group-hover:text-slate-300 transition-colors leading-tight";
+    })
+  };
 
   return (
     <section
       id="ecosystem-overview"
-      ref={containerRef}
-      className="relative h-screen w-full flex items-center justify-center bg-[#020617] overflow-hidden perspective-1000 snap-start"
+      className="relative min-h-screen py-8 md:py-16 flex flex-col items-center justify-center bg-[#020617] snap-start px-4 overflow-hidden"
     >
-      {/* --- CINEMATIC BACKGROUND --- */}
+      {/* Background Atmosphere */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Deep atmospheric gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-[#0B1120] to-slate-950" />
-        {/* Subtle radial bloom from center */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] bg-blue-900/10 rounded-full blur-[120px]" />
-        {/* High-frequency noise texture for realism */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[#020617]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-[1000px] h-[1000px] bg-emerald-600/[0.02] rounded-full blur-[120px]" />
         <PremiumDoodles />
       </div>
 
-      {/* --- SECTION BLENDERS --- */}
-      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[hsl(var(--background))] to-transparent z-40 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[hsl(var(--background))] to-transparent z-40 pointer-events-none" />
-
-      {/* --- VISUAL ORBIT RING (Decoration) --- */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[520px] md:h-[520px] rounded-full border border-blue-500/10 z-10 pointer-events-none">
-        <div className="absolute inset-[1px] rounded-full border border-white/5 opacity-50" />
-      </div>
-
-      {/* --- CORE ELEMENT (Center) --- */}
-      <div className="relative flex flex-col items-center justify-center w-28 h-28 md:w-40 md:h-40 z-20 group">
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 via-transparent to-blue-900/40 backdrop-blur-2xl border border-white/15 shadow-[0_0_40px_rgba(0,0,0,0.4),inset_0_1px_20px_rgba(255,255,255,0.1)] overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_60px_rgba(59,130,246,0.3)]">
-          <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-to-b from-white/5 to-transparent rotate-45 pointer-events-none" />
-        </div>
-        <div className="absolute inset-[10px] rounded-full border border-blue-500/20" />
-        <div className="absolute inset-[10px] rounded-full border-t border-b border-blue-400/40 opacity-50 animate-[spin_10s_linear_infinite_reverse]" />
-        <div className="relative z-10 flex flex-col items-center justify-center">
-          <div className="relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-b from-slate-800 to-slate-950 rounded-2xl border border-blue-500/30 shadow-[0_10px_20px_rgba(0,0,0,0.5)] mb-2 group-hover:translate-y-[-2px] transition-transform duration-300">
-            <div className="absolute inset-0 bg-blue-500/10 rounded-2xl animate-pulse" />
-            <Radio className="w-6 h-6 md:w-8 md:h-8 text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
+      <div className="container mx-auto relative z-20 flex flex-col items-center">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="text-center max-w-5xl mx-auto mb-2 md:mb-10"
+        >
+          <div className="inline-flex items-center gap-1.5 md:gap-2 px-2.5 py-0.5 md:px-4 md:py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.4em] mb-2 md:mb-6">
+            <Shield className="w-2.5 h-2.5 md:w-3 md:h-3 shrink-0" />
+            <span>Operational Architecture</span>
           </div>
-          <span className="text-[8px] md:text-[10px] font-bold text-white tracking-[0.3em] pl-1 font-mono uppercase opacity-80 group-hover:opacity-100 transition-opacity">Nuvana</span>
-          <span className="text-[6px] md:text-[8px] font-semibold text-blue-400 tracking-[0.2em] uppercase">Core Sync</span>
-        </div>
-      </div>
+          <h2 className="w-full text-lg md:text-5xl lg:text-6xl font-black text-white mb-2 md:mb-6 leading-tight tracking-tighter whitespace-nowrap text-center flex items-center justify-center">
+            THE NUVANA <span className="gradient-text ml-[0.3em]">PYRAMID</span>
+          </h2>
+          <div className="h-1 w-12 md:w-20 bg-emerald-500 mx-auto rounded-full mb-3 md:mb-8" />
+          <p className="hidden md:block text-slate-400 text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
+            A master-structured hierarchy where hardware, OS, and AI  <br className="hidden md:block" />
+            are powered by a managed internet foundation.
+          </p>
+        </motion.div>
 
-      {/* WIDGETS */}
-      <div ref={widget9Ref} className={widgetClass}>
-        <div className={iconBgClass}>
-          <Tablet size={24} />
-        </div>
-        <h3 className={titleClass}>Nuvana Corebook</h3>
-        <p className={descClass}>Hardware device + controlled learning environment</p>
-      </div>
+        {/* Pyramid Stack */}
+        <div className="relative w-full flex flex-col items-center gap-2 md:gap-4">
+          {/* Internal Navigation Dots (Centred vertically to the right of the pyramid) */}
+          <div className="hidden md:flex absolute -right-2 md:-right-20 top-1/2 -translate-y-1/2 z-30 flex-col gap-6">
+            {pyramidLevels.map((l) => (
+              <button
+                key={l.id}
+                onClick={() => document.getElementById(`layer-${l.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+                className="group relative flex items-center justify-center w-4 h-4"
+              >
+                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-white/10 border border-white/20 transition-all duration-300 group-hover:bg-emerald-500 group-hover:scale-150 group-hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
+                <span className="absolute right-10 px-3 py-1.5 rounded bg-slate-900 border border-white/10 text-[10px] font-black text-white uppercase tracking-tighter opacity-0 group-hover:opacity-100 whitespace-nowrap pointer-events-none transition-all">
+                  {l.title}
+                </span>
+              </button>
+            ))}
+          </div>
 
-      <div ref={widget12Ref} className={widgetClass}>
-        <div className={iconBgClass}>
-          <LayoutGrid size={24} />
-        </div>
-        <h3 className={titleClass}>Classroom OS</h3>
-        <p className={descClass}>Student–Teacher–Admin operating system</p>
-      </div>
+          {pyramidLevels.map((item, index) => (
+            <motion.div
+              key={item.id}
+              id={`layer-${item.id}`}
+              custom={index}
+              variants={levelVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className={`relative ${item.width} group scroll-mt-32`}
+            >
+              <div className={`
+                relative overflow-hidden flex flex-col
+                rounded-[1rem] md:rounded-[2rem] border ${item.border}
+                bg-slate-900/30 backdrop-blur-xl p-1.5 md:p-6
+                hover:border-emerald-500/40 hover:bg-slate-900/50 
+                transition-all duration-700 shadow-2xl shadow-black/50
+              `}>
+                {/* Background Detail */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(52,211,153,0.05),transparent)] pointer-events-none" />
+                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
 
-      <div ref={widget3Ref} className={widgetClass}>
-        <div className={iconBgClass}>
-          <Brain size={24} />
-        </div>
-        <h3 className={titleClass}>Dual Intelligence</h3>
-        <p className={descClass}>AI for teachers + AI for students</p>
-      </div>
+                {/* Layer Badge - CENTRAL */}
+                <div className="w-full flex justify-center mb-1.5 md:mb-3">
+                  <div className={`
+                    px-2 md:px-3 py-0.5 rounded-full bg-white/5 border border-white/10 
+                    text-[6px] md:text-[9px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] ${item.accent}
+                    flex items-center gap-1 md:gap-1.5
+                  `}>
+                    <div className={`w-0.5 h-0.5 md:w-1 md:h-1 rounded-full ${item.accent.replace('text', 'bg')} animate-pulse`} />
+                    LEVEL 0{item.level}
+                    <div className={`w-0.5 h-0.5 md:w-1 md:h-1 rounded-full ${item.accent.replace('text', 'bg')} animate-pulse`} />
+                  </div>
+                </div>
 
-      <div ref={widget6Ref} className={widgetClass}>
-        <div className={iconBgClass}>
-          <Wifi size={24} />
-        </div>
-        <h3 className={titleClass}>Nuvanet</h3>
-        <p className={descClass}>Internet without infrastructure</p>
-      </div>
+                <div className="grid grid-cols-[auto_1fr_auto] md:grid-cols-[theme(spacing.24)_1fr_theme(spacing.24)] lg:grid-cols-[theme(spacing.28)_1fr_theme(spacing.28)] items-center gap-0 md:gap-2">
+                  {/* Icon Column - LEFT (Fixed width) */}
+                  <div className={`flex flex-col items-start -mt-2.5 md:mt-0 ${item.id === 'ai' ? 'justify-between py-1' : 'pt-2 md:pt-3'}`}>
+                    {item.icons.map((Icon, i) => (
+                      <div key={i} className={`
+                        w-5 h-5 md:w-8 md:h-8 rounded-lg bg-slate-950 border border-white/5
+                        flex items-center justify-center
+                        group-hover:scale-110 group-hover:rotate-[360deg] transition-all duration-1000 ease-out
+                        shadow-[0_0_15px_rgba(0,0,0,0.5)]
+                      `}>
+                        <Icon className={`w-2.5 h-2.5 md:w-4 md:h-4 ${item.iconColors?.[i] || item.accent}`} />
+                      </div>
+                    ))}
+                  </div>
 
-      {/* --- UI CONTROLS --- */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[68px] md:translate-y-[108px] z-50 flex flex-col items-center gap-2">
-        <div className="flex items-center gap-4 md:gap-8 mb-1 md:mb-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={prevStep}
-            disabled={currentStep === 0}
-            className="w-7 h-7 md:w-9 md:h-9 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-          >
-            <ChevronLeft className="w-3.5 h-3.5 md:w-4 md:h-4" />
-          </Button>
+                  {/* Content - CENTRAL (Mathematically Centered) */}
+                  <div className="flex flex-col justify-center text-center px-0.5 overflow-hidden min-w-0">
+                    <h3 className="text-[7px] md:text-sm lg:text-base font-black text-white mb-0.5 tracking-tighter uppercase leading-[1.1] whitespace-normal md:whitespace-nowrap">
+                      {item.title}
+                    </h3>
+                    <p className="hidden md:block text-slate-400 text-[6.5px] md:text-[9px] leading-tight max-w-full md:max-w-[180px] lg:max-w-xs mx-auto font-bold uppercase opacity-60">
+                      {item.description}
+                    </p>
+                  </div>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={nextStep}
-            disabled={currentStep === totalSteps}
-            className="w-7 h-7 md:w-9 md:h-9 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all group"
-          >
-            <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-0.5 transition-transform" />
-          </Button>
-        </div>
+                  {/* Features - RIGHT (Fixed width) */}
+                  <div className="flex flex-col items-end justify-center gap-1 py-1">
+                    {item.features.map((f, i) => (
+                      <div key={i} className="flex items-center gap-1 bg-white/3 hover:bg-emerald-500/5 px-1.5 py-0.5 rounded border border-white/5 hover:border-emerald-500/20 transition-all duration-300">
+                        <span className="text-[4.5px] md:text-[8px] font-bold uppercase tracking-wider text-slate-400 whitespace-normal md:whitespace-nowrap text-right leading-[1.1]">
+                          {f}
+                        </span>
+                        <CheckCircle2 size={7} className="text-emerald-500/60" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-        {/* Step Indicators */}
-        <div className="flex gap-1 md:gap-1.5 bg-black/40 backdrop-blur-md px-2 md:px-2.5 py-1 rounded-full border border-white/10">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <button
-              key={i}
-              onClick={() => {
-                setCurrentStep(i);
-              }}
-              className={`h-[1.5px] md:h-[2px] rounded-full transition-all duration-500 ${currentStep === i
-                ? 'w-3 md:w-5 bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]'
-                : 'w-1 bg-white/10'
-                }`}
-            />
+              {/* Stack Connectors */}
+              {index < pyramidLevels.length - 1 && (
+                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-20">
+                  <div className="w-1 h-1 rounded-full bg-emerald-500" />
+                  <div className="w-px h-4 bg-gradient-to-b from-emerald-500 to-transparent" />
+                </div>
+              )}
+            </motion.div>
           ))}
+        </div>
+
+        {/* Global Footer of Section */}
+        <div className="mt-4 md:mt-24 w-full md:w-auto flex flex-col items-center gap-2 md:gap-4">
+          <div className="relative w-full md:w-auto flex items-center justify-between md:justify-center gap-3 md:gap-6 px-4 py-2 md:px-8 md:py-4 rounded-full bg-slate-900/60 border border-white/5 backdrop-blur-md opacity-40">
+            <span className="font-mono text-[7px] md:text-[9px] tracking-[0.3em] md:tracking-[0.5em] text-white uppercase">End-To-End Integration</span>
+
+            {/* Blinking Dot - Absolutely Centered on Mobile to ensure it's exact */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.8)] animate-pulse" />
+
+            <span className="font-mono text-[7px] md:text-[9px] tracking-[0.3em] md:tracking-[0.5em] text-white uppercase text-right">One Vendor. One Stack.</span>
+          </div>
         </div>
       </div>
     </section>

@@ -36,7 +36,7 @@ export function HardwareSection() {
     ];
 
     return (
-        <section className="h-screen flex items-center py-24 bg-background relative overflow-hidden snap-start">
+        <section id="hardware" className="min-h-screen flex items-center py-8 md:py-24 bg-background relative overflow-hidden snap-start">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-1/3 h-full bg-emerald-900/10 skew-x-12 blur-3xl" />
             <PremiumDoodles />
@@ -46,44 +46,53 @@ export function HardwareSection() {
             <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[hsl(var(--background))] to-transparent z-10 pointer-events-none" />
 
             <div className="container mx-auto px-4 relative z-30">
-                <div className="grid md:grid-cols-2 gap-16 items-center">
+                {/* Mobile-Only Layer Badge */}
+                <div className="md:hidden flex justify-center mb-2">
+                    <div className="inline-block px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-medium">
+                        Hardware Layer
+                    </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-3 md:gap-16 items-center">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         className="order-2 md:order-1"
                     >
-                        <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+                        <div className="hidden md:inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
                             Hardware Layer
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                        <h2 className="text-lg md:text-5xl font-bold mb-3 text-white text-center md:text-left">
                             Nuvana Corebook
                         </h2>
-                        <p className="text-xl text-muted-foreground mb-8">
+                        <p className="hidden md:block text-xl text-muted-foreground mb-8 text-center md:text-left">
                             Purpose-built classroom devices designed to withstand the rigors of daily use while providing a strictly controlled learning environment.
                         </p>
 
-                        <div className="space-y-6">
+                        <div className="space-y-2 md:space-y-6">
                             {features.map((feature, idx) => (
-                                <div key={idx} className="flex gap-4">
-                                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-                                        <feature.icon size={24} />
+                                <div key={idx} className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-1 md:gap-4">
+                                    <div className="flex-shrink-0 w-6 h-6 md:w-12 md:h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                                        <feature.icon className="w-3 h-3 md:w-6 md:h-6" />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-white mb-1">{feature.title}</h3>
-                                        <p className="text-gray-400">{feature.description}</p>
+                                        <h3 className="font-semibold text-white text-xs md:text-base mb-px md:mb-1">{feature.title}</h3>
+                                        <p className="text-[10px] md:text-base text-gray-400 leading-tight">{feature.description}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
 
-                        <Button
-                            className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20"
-                            size="lg"
-                            onClick={() => setIsSpecOpen(true)}
-                        >
-                            View Specs
-                        </Button>
+                        <div className="flex justify-center md:justify-start">
+                            <Button
+                                className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20"
+                                size="lg"
+                                onClick={() => setIsSpecOpen(true)}
+                            >
+                                View Specs
+                            </Button>
+                        </div>
                     </motion.div>
 
                     <motion.div
