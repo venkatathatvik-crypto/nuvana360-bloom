@@ -40,7 +40,7 @@ export const PremiumDoodles: React.FC = () => {
     }), []);
 
     return (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+        <div className="hidden md:block absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
             {doodles.map((doodle, i) => (
                 <motion.div
                     key={i}
