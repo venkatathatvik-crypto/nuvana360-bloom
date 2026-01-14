@@ -51,17 +51,17 @@ export const FAQ = () => {
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-4 md:mb-12">
-          <h2 className="text-lg md:text-5xl font-bold text-white mb-2 md:mb-4">Common Questions</h2>
+        <div className="max-w-3xl mx-auto text-center mb-2 md:mb-12">
+          <h2 className="text-lg md:text-5xl font-bold text-white mb-1 md:mb-4">Common Questions</h2>
           <p className="text-xs md:text-base text-slate-400">Everything you need to know about NuvanaCore.</p>
         </div>
 
         <div className="max-w-3xl mx-auto relative">
-          <Card className="bg-slate-900/40 backdrop-blur-md border border-white/10 overflow-hidden max-h-[50vh] flex flex-col">
+          <Card className="bg-slate-900/40 backdrop-blur-md border border-white/10 overflow-hidden max-h-[40vh] md:max-h-[50vh] flex flex-col">
             <div
               ref={scrollRef}
               onScroll={handleInternalScroll}
-              className="overflow-y-auto p-4 md:p-8 premium-scrollbar"
+              className="overflow-y-auto p-2 md:p-4 premium-scrollbar"
             >
               <Accordion type="single" collapsible className="w-full">
                 {faqItems.map((item, idx) => (

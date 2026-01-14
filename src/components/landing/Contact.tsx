@@ -65,13 +65,13 @@ export const Contact = () => {
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
-        <div className="max-w-2xl mx-auto text-center mb-4 md:mb-12">
-          <h2 className="text-lg md:text-5xl font-bold text-white mb-2 md:mb-4">Get In Touch</h2>
+        <div className="max-w-2xl mx-auto text-center mb-2 md:mb-12">
+          <h2 className="text-lg md:text-5xl font-bold text-white mb-1 md:mb-4">Get In Touch</h2>
           <p className="text-xs md:text-base text-slate-400">Ready to transform your school? Let's talk.</p>
         </div>
 
-        <Card className="max-w-2xl mx-auto bg-slate-900/40 backdrop-blur-md border border-white/10 p-4 md:p-8">
-          <form onSubmit={handleSubmit} className="space-y-3 md:space-y-6">
+        <Card className="max-w-2xl mx-auto bg-slate-900/40 backdrop-blur-md border border-white/10 p-2 md:p-8">
+          <form onSubmit={handleSubmit} className="space-y-2 md:space-y-6">
             <div className="grid md:grid-cols-2 gap-3 md:gap-6">
               <div className="space-y-1.5 md:space-y-2">
                 <Label htmlFor="name" className="text-white/70 text-xs md:text-sm">Name</Label>
