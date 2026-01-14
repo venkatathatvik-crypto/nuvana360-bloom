@@ -25,7 +25,7 @@ export const Contact = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "075c3f3f-2b50-482f-8700-6532881b4d08",
+          access_key: "c50c4e9b-5804-4835-b9e0-2076a74ef18f",
           name, email, message,
           subject: `Nuvana Contact: ${name}`
         }),
