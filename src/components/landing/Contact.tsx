@@ -32,11 +32,27 @@ export const Contact = () => {
       });
 
       if (response.ok) {
-        toast({ title: "Message sent", description: "The Nuvanacore team will get back to you soon." });
-        setName(""); setEmail(""); setMessage("");
+        toast({
+          title: "✅ Submitted Successfully!",
+          description: "Thank you for reaching out. Our team will contact you soon.",
+          duration: 5000,
+        });
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        toast({
+          title: "Submission Failed",
+          description: "Please try again or email us directly at Shriniketan@nuvanacore.com",
+          variant: "destructive"
+        });
       }
     } catch {
-      toast({ title: "Error", description: "Failed to send message.", variant: "destructive" });
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again or email us at Shriniketan@nuvanacore.com",
+        variant: "destructive"
+      });
     } finally {
       setLoading(false);
     }
