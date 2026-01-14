@@ -36,7 +36,7 @@ export function HardwareSection() {
     ];
 
     return (
-        <section id="hardware" className="min-h-screen flex items-center py-8 md:py-24 bg-background relative overflow-hidden snap-start">
+        <section id="hardware" className="min-h-0 md:min-h-screen flex items-center py-2 md:py-24 bg-background relative overflow-hidden snap-start">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-1/3 h-full bg-emerald-900/10 skew-x-12 blur-3xl" />
             <PremiumDoodles />

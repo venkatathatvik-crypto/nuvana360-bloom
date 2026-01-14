@@ -82,7 +82,7 @@ export const EcosystemOverview: React.FC = () => {
   return (
     <section
       id="ecosystem-overview"
-      className="relative min-h-screen py-8 md:py-16 flex flex-col items-center justify-center bg-[#020617] snap-start px-4 overflow-hidden"
+      className="relative min-h-0 md:min-h-screen py-2 md:py-16 flex flex-col items-center justify-center bg-[#020617] snap-start px-4 overflow-hidden"
     >
       {/* Background Atmosphere */}
       <div className="absolute inset-0 z-0 pointer-events-none">
