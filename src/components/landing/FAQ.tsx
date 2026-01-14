@@ -44,7 +44,7 @@ export const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="min-h-0 md:min-h-screen max-h-screen md:max-h-none flex items-start md:items-center relative pt-2 pb-0 md:py-24 bg-slate-950 snap-start">
+    <section id="faq" className="min-h-0 md:min-h-screen max-h-screen md:max-h-none flex items-start md:items-center relative py-2 md:py-24 bg-slate-950 snap-start overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#020617_80%)]" />
         <PremiumDoodles />
