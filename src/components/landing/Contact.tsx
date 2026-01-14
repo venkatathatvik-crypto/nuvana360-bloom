@@ -59,7 +59,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="min-h-screen flex items-center relative py-4 md:py-24 bg-[#020617] snap-start">
+    <section id="contact" className="min-h-0 md:min-h-screen flex items-center relative py-4 md:py-24 bg-[#020617] snap-start">
       <div className="absolute inset-0 pointer-events-none">
         <PremiumDoodles />
       </div>
